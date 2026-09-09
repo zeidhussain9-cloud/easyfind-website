@@ -1198,7 +1198,7 @@ function Footer() {
             <h3 className="text-lg font-bold tracking-tight" style={{ color: GOLD }}>
               Service Areas
             </h3>
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-white/70 sm:grid-cols-3 lg:grid-cols-1">
+            <ul className="flex flex-col space-y-2.5 text-sm text-white/70">
               {[
                 "Koramangala",
                 "HSR Layout",
