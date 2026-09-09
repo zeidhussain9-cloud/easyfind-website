@@ -1253,7 +1253,7 @@ function Footer() {
                 <Mail size={16} className="shrink-0" style={{ color: GOLD }} />
                 <a
                   href={`mailto:${BUSINESS_CONFIG.email}`}
-                  className="hover:text-white transition-colors break-all"
+                  className="hover:text-white transition-colors break-words"
                 >
                   {BUSINESS_CONFIG.email}
                 </a>
