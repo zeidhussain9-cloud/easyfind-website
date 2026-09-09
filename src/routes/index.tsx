@@ -1015,7 +1015,6 @@ function LeadForm() {
                     Call Us Now
                   </a>
                 </div>
-
               </div>
               <div className="flex gap-6">
                 <div
@@ -1221,7 +1220,6 @@ function Footer() {
                 </li>
               ))}
             </ul>
-
           </div>
 
           {/* Column 4: Reach Us */}
