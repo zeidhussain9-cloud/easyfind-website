@@ -1008,12 +1008,14 @@ function LeadForm() {
                   <div className="mt-1 text-sm text-gray-500">Available 10 AM - 7 PM</div>
                   <a
                     href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
-                    className="mt-2 block text-xl font-bold"
-                    style={{ color: NAVY }}
+                    className="mt-3 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold shadow-sm transition-transform hover:-translate-y-0.5"
+                    style={{ background: GOLD, color: NAVY }}
                   >
-                    {BUSINESS_CONFIG.phone}
+                    <Phone size={16} />
+                    Call Us Now
                   </a>
                 </div>
+
               </div>
               <div className="flex gap-6">
                 <div
@@ -1196,32 +1198,30 @@ function Footer() {
             <h3 className="text-lg font-bold tracking-tight" style={{ color: GOLD }}>
               Service Areas
             </h3>
-            <ul className="grid grid-cols-1 gap-3 text-sm text-white/70">
-              <li className="flex items-center gap-2">
-                <MapPin size={14} style={{ color: GOLD }} />
-                <span>Koramangala</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin size={14} style={{ color: GOLD }} />
-                <span>HSR Layout</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin size={14} style={{ color: GOLD }} />
-                <span>Indiranagar</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin size={14} style={{ color: GOLD }} />
-                <span>Bellandur</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin size={14} style={{ color: GOLD }} />
-                <span>Sarjapur Road</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin size={14} style={{ color: GOLD }} />
-                <span>Whitefield</span>
-              </li>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-white/70 sm:grid-cols-3 lg:grid-cols-1">
+              {[
+                "Koramangala",
+                "HSR Layout",
+                "Indiranagar",
+                "Bellandur",
+                "Sarjapur Road",
+                "Whitefield",
+                "Hoodi",
+                "Mahadevapura",
+                "Marathahalli",
+                "Kadubeesanahalli",
+                "ITPL",
+                "Varthur",
+                "Kasavanahalli",
+                "Harlur",
+              ].map((area) => (
+                <li key={area} className="flex items-center gap-2">
+                  <MapPin size={14} className="shrink-0" style={{ color: GOLD }} />
+                  <span>{area}</span>
+                </li>
+              ))}
             </ul>
+
           </div>
 
           {/* Column 4: Reach Us */}
@@ -1245,11 +1245,12 @@ function Footer() {
                 <Phone size={16} className="shrink-0" style={{ color: GOLD }} />
                 <a
                   href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
-                  className="hover:text-white transition-colors"
+                  className="font-semibold hover:text-white transition-colors"
                 >
-                  {BUSINESS_CONFIG.phone}
+                  Call Us Now
                 </a>
               </div>
+
               <div className="flex items-center gap-2.5">
                 <Mail size={16} className="shrink-0" style={{ color: GOLD }} />
                 <a
