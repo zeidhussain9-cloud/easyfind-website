@@ -741,6 +741,79 @@ function HowItWorks() {
   );
 }
 
+function AreasSection() {
+  return (
+    <section id="areas" className="py-16 md:py-24" style={{ background: "#fff" }}>
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <SectionLabel>Areas We Cover</SectionLabel>
+        <SectionTitle>East Bangalore, Mapped by Character</SectionTitle>
+        <p className="mx-auto mt-4 max-w-2xl text-center text-base" style={{ color: MUTED }}>
+          We group localities by how people actually live and work — so you can choose the right
+          fit, faster.
+        </p>
+        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {CLUSTERS.map((c, idx) => {
+            const featured = idx === 0 || idx === CLUSTERS.length - 1;
+            return (
+              <div
+                key={c.name}
+                className={`group relative flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1 md:p-8 ${
+                  featured ? "lg:col-span-2" : ""
+                }`}
+                style={{
+                  borderColor: BORDER,
+                  boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.boxShadow = "0 12px 32px rgba(26,58,92,0.10)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.boxShadow = "0 2px 16px rgba(0,0,0,0.04)")
+                }
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <span
+                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    style={{ background: SURFACE, color: NAVY }}
+                  >
+                    <MapPin size={20} />
+                  </span>
+                  <h3 className="text-lg font-bold md:text-xl" style={{ color: NAVY }}>
+                    {c.name}
+                  </h3>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: MUTED }}>
+                  {c.tagline}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {c.localities.map((loc) => (
+                    <span
+                      key={loc}
+                      className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
+                      style={{ background: SURFACE, color: NAVY }}
+                    >
+                      {loc}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-auto pt-5">
+                  <div
+                    className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold"
+                    style={{ background: "rgba(201,168,76,0.12)", color: "#8a6f2a" }}
+                  >
+                    <HelpCircle size={12} />
+                    {c.note}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function WhyUs() {
   return (
     <section id="why-choose-us" className="py-16 md:py-24" style={{ background: "#fff" }}>
