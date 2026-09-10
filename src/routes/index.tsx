@@ -1428,6 +1428,7 @@ function Index() {
         <TrackRecord />
         <Services />
         <HowItWorks />
+        <AreasSection />
         <WhyUs />
         <Reviews />
         <LeadForm />
