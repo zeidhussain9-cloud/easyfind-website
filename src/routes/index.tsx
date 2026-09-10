@@ -212,8 +212,7 @@ const WHY_US = [
 const CLUSTERS = [
   {
     name: "Whitefield & ITPL Corridor",
-    tagline:
-      "IT parks, villa communities, and strong rental demand from the tech workforce.",
+    tagline: "IT parks, villa communities, and strong rental demand from the tech workforce.",
     localities: ["Whitefield", "ITPL", "Hoodi", "Mahadevapura"],
     note: "Rent scenarios and demand profile: to be confirmed.",
   },
@@ -226,15 +225,13 @@ const CLUSTERS = [
   },
   {
     name: "Sarjapur Road Corridor",
-    tagline:
-      "Fast-growing residential stretch linking IT hubs to quieter family neighbourhoods.",
+    tagline: "Fast-growing residential stretch linking IT hubs to quieter family neighbourhoods.",
     localities: ["Sarjapur Road", "Kasavanahalli", "Harlur", "Varthur"],
     note: "Rent scenarios and demand profile: to be confirmed.",
   },
   {
     name: "Indiranagar & Old Airport Road",
-    tagline:
-      "Established east Bangalore hub known for retail, F&B, and premium independent homes.",
+    tagline: "Established east Bangalore hub known for retail, F&B, and premium independent homes.",
     localities: ["Indiranagar", "Old Airport Road"],
     note: "Rent scenarios and demand profile: to be confirmed.",
   },
@@ -750,10 +747,7 @@ function AreasSection() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionLabel>Areas We Cover</SectionLabel>
         <SectionTitle>East Bangalore, Mapped by Character</SectionTitle>
-        <p
-          className="mx-auto mt-4 max-w-2xl text-center text-base"
-          style={{ color: MUTED }}
-        >
+        <p className="mx-auto mt-4 max-w-2xl text-center text-base" style={{ color: MUTED }}>
           We group localities by how people actually live and work — so you can choose the right
           fit, faster.
         </p>
