@@ -209,9 +209,43 @@ const WHY_US = [
   },
 ];
 
+const CLUSTERS = [
+  {
+    name: "Whitefield & ITPL Corridor",
+    tagline: "IT parks, villa communities, and strong rental demand from the tech workforce.",
+    localities: ["Whitefield", "ITPL", "Hoodi", "Mahadevapura"],
+    note: "Rent scenarios and demand profile: to be confirmed.",
+  },
+  {
+    name: "ORR Tech Belt",
+    tagline: "Connected corridor along the Outer Ring Road with offices, apartments, and co-living options.",
+    localities: ["Marathahalli", "Kadubeesanahalli", "Bellandur"],
+    note: "Rent scenarios and demand profile: to be confirmed.",
+  },
+  {
+    name: "Sarjapur Road Corridor",
+    tagline: "Fast-growing residential stretch linking IT hubs to quieter family neighbourhoods.",
+    localities: ["Sarjapur Road", "Kasavanahalli", "Harlur", "Varthur"],
+    note: "Rent scenarios and demand profile: to be confirmed.",
+  },
+  {
+    name: "Indiranagar & Old Airport Road",
+    tagline: "Established east Bangalore hub known for retail, F&B, and premium independent homes.",
+    localities: ["Indiranagar", "Old Airport Road"],
+    note: "Rent scenarios and demand profile: to be confirmed.",
+  },
+  {
+    name: "Central Bangalore Hubs",
+    tagline: "Core residential and commercial pockets we continue to serve across the city.",
+    localities: ["Koramangala", "HSR Layout"],
+    note: "Rent scenarios and demand profile: to be confirmed.",
+  },
+];
+
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "How It Works", href: "#how-it-works" },
+  { label: "Areas", href: "#areas" },
   { label: "Why Choose Us", href: "#why-choose-us" },
   { label: "Reviews", href: "#reviews" },
   { label: "Contact", href: "#contact" },
