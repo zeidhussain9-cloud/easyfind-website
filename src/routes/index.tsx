@@ -246,6 +246,7 @@ const CLUSTERS = [
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "How It Works", href: "#how-it-works" },
+  { label: "Areas", href: "#areas" },
   { label: "Why Choose Us", href: "#why-choose-us" },
   { label: "Reviews", href: "#reviews" },
   { label: "Contact", href: "#contact" },
