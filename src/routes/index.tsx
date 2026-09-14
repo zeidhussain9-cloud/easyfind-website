@@ -209,7 +209,18 @@ const WHY_US = [
   },
 ];
 
-const CLUSTERS = [
+type ClusterTone = "navy" | "blue" | "warm" | "white";
+
+type Cluster = {
+  name: string;
+  icon: LucideIcon;
+  tone: ClusterTone;
+  tagline: string;
+  localities: string[];
+  note: string;
+};
+
+const CLUSTERS: Cluster[] = [
   {
     name: "ORR Tech Belt",
     icon: Building,
