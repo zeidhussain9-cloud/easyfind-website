@@ -247,7 +247,8 @@ const CLUSTERS = [
     name: "Indiranagar & Old Airport Road",
     icon: MapPin,
     tone: "blue",
-    tagline: "Two established East Bangalore service areas with residential and commercial streets.",
+    tagline:
+      "Two established East Bangalore service areas with residential and commercial streets.",
     localities: ["Indiranagar", "Old Airport Road"],
     note: "Market details: To be confirmed.",
   },
@@ -255,7 +256,8 @@ const CLUSTERS = [
     name: "Central Bangalore Hubs",
     icon: Handshake,
     tone: "warm",
-    tagline: "Two established residential and commercial service areas near key employment corridors.",
+    tagline:
+      "Two established residential and commercial service areas near key employment corridors.",
     localities: ["Koramangala", "HSR Layout"],
     note: "Market details: To be confirmed.",
   },
