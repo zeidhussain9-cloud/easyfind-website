@@ -837,7 +837,7 @@ function AreasSection() {
                 key={c.name}
                 className={`group relative flex min-h-72 flex-col overflow-hidden rounded-2xl border p-6 shadow-sm backdrop-blur-md transition duration-300 motion-reduce:transition-none md:p-7 lg:min-h-80 ${
                   featured
-                    ? "md:col-span-2 lg:col-span-6"
+                    ? "lg:col-span-6"
                     : idx < 3
                       ? "lg:col-span-3"
                       : "lg:col-span-4"
