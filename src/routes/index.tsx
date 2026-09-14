@@ -836,11 +836,7 @@ function AreasSection() {
               <article
                 key={c.name}
                 className={`group relative flex min-h-72 flex-col overflow-hidden rounded-2xl border p-6 shadow-sm backdrop-blur-md transition duration-300 motion-reduce:transition-none md:p-7 lg:min-h-80 ${
-                  featured
-                    ? "lg:col-span-6"
-                    : idx < 3
-                      ? "lg:col-span-3"
-                      : "lg:col-span-4"
+                  featured ? "lg:col-span-6" : idx < 3 ? "lg:col-span-3" : "lg:col-span-4"
                 }`}
                 style={{
                   background: style.background,
