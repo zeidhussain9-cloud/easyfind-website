@@ -209,37 +209,68 @@ const WHY_US = [
   },
 ];
 
-const CLUSTERS = [
-  {
-    name: "Whitefield & ITPL Corridor",
-    tagline: "IT parks, villa communities, and strong rental demand from the tech workforce.",
-    localities: ["Whitefield", "ITPL", "Hoodi", "Mahadevapura"],
-    note: "Rent scenarios and demand profile: to be confirmed.",
-  },
+type ClusterTone = "navy" | "blue" | "warm" | "white";
+
+type Cluster = {
+  name: string;
+  icon: LucideIcon;
+  tone: ClusterTone;
+  tagline: string;
+  localities: string[];
+  note: string;
+};
+
+const CLUSTERS: Cluster[] = [
   {
     name: "ORR Tech Belt",
+    icon: Building,
+    tone: "navy",
     tagline:
-      "Connected corridor along the Outer Ring Road with offices, apartments, and co-living options.",
+      "Our main East Bangalore corridor, connecting established office districts and residential communities along the Outer Ring Road.",
     localities: ["Marathahalli", "Kadubeesanahalli", "Bellandur"],
-    note: "Rent scenarios and demand profile: to be confirmed.",
+    note: "Market details: To be confirmed.",
+  },
+  {
+    name: "Whitefield & ITPL Corridor",
+    icon: Globe,
+    tone: "blue",
+    tagline: "An established East Bangalore business and residential corridor around Whitefield.",
+    localities: ["Whitefield", "ITPL"],
+    note: "Market details: To be confirmed.",
+  },
+  {
+    name: "Hoodi & Mahadevapura",
+    icon: Layers,
+    tone: "warm",
+    tagline: "A connected service pocket between Whitefield and the Outer Ring Road corridor.",
+    localities: ["Hoodi", "Mahadevapura"],
+    note: "Market details: To be confirmed.",
   },
   {
     name: "Sarjapur Road Corridor",
-    tagline: "Fast-growing residential stretch linking IT hubs to quieter family neighbourhoods.",
+    icon: Home,
+    tone: "white",
+    tagline: "A broad residential corridor linking Sarjapur Road with nearby East Bangalore areas.",
     localities: ["Sarjapur Road", "Kasavanahalli", "Harlur", "Varthur"],
-    note: "Rent scenarios and demand profile: to be confirmed.",
+    note: "Market details: To be confirmed.",
   },
   {
     name: "Indiranagar & Old Airport Road",
-    tagline: "Established east Bangalore hub known for retail, F&B, and premium independent homes.",
+    icon: MapPin,
+    tone: "blue",
+    tagline:
+      "Two established East Bangalore service areas with residential and commercial streets.",
     localities: ["Indiranagar", "Old Airport Road"],
-    note: "Rent scenarios and demand profile: to be confirmed.",
+    note: "Market details: To be confirmed.",
   },
   {
     name: "Central Bangalore Hubs",
-    tagline: "Core residential and commercial pockets we continue to serve across the city.",
+    icon: Handshake,
+    tone: "warm",
+    tagline:
+      "Two established residential and commercial service areas near key employment corridors.",
     localities: ["Koramangala", "HSR Layout"],
-    note: "Rent scenarios and demand profile: to be confirmed.",
+    note: "Market details: To be confirmed.",
   },
 ];
 
@@ -743,70 +774,136 @@ function HowItWorks() {
 }
 
 function AreasSection() {
+  const cardStyles = {
+    navy: {
+      background: "rgba(26, 58, 92, 0.94)",
+      borderColor: "rgba(255, 255, 255, 0.42)",
+      color: "#ffffff",
+      muted: "rgba(255, 255, 255, 0.78)",
+      iconBackground: "rgba(255, 255, 255, 0.14)",
+      tagBackground: "rgba(255, 255, 255, 0.12)",
+      tagColor: "#ffffff",
+    },
+    blue: {
+      background: "rgba(238, 244, 247, 0.86)",
+      borderColor: "rgba(255, 255, 255, 0.92)",
+      color: NAVY,
+      muted: MUTED,
+      iconBackground: "rgba(255, 255, 255, 0.82)",
+      tagBackground: "rgba(255, 255, 255, 0.7)",
+      tagColor: NAVY,
+    },
+    warm: {
+      background: "rgba(247, 243, 232, 0.82)",
+      borderColor: "rgba(255, 255, 255, 0.94)",
+      color: NAVY,
+      muted: MUTED,
+      iconBackground: "rgba(255, 255, 255, 0.82)",
+      tagBackground: "rgba(255, 255, 255, 0.72)",
+      tagColor: NAVY,
+    },
+    white: {
+      background: "rgba(255, 255, 255, 0.84)",
+      borderColor: "rgba(255, 255, 255, 0.96)",
+      color: NAVY,
+      muted: MUTED,
+      iconBackground: "rgba(238, 244, 247, 0.92)",
+      tagBackground: "rgba(238, 244, 247, 0.78)",
+      tagColor: NAVY,
+    },
+  } as const;
+
   return (
-    <section id="areas" className="py-16 md:py-24" style={{ background: "#fff" }}>
+    <section id="areas" className="overflow-hidden py-16 md:py-24" style={{ background: SURFACE }}>
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionLabel>Areas We Cover</SectionLabel>
-        <SectionTitle>East Bangalore, Mapped by Character</SectionTitle>
+        <div style={{ fontFamily: '"Libre Baskerville", Georgia, serif' }}>
+          <SectionTitle>East Bangalore, Mapped by Character</SectionTitle>
+        </div>
         <p className="mx-auto mt-4 max-w-2xl text-center text-base" style={{ color: MUTED }}>
           We group localities by how people actually live and work — so you can choose the right
           fit, faster.
         </p>
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12"
+          style={{ fontFamily: '"IBM Plex Sans", Arial, sans-serif' }}
+        >
           {CLUSTERS.map((c, idx) => {
-            const featured = idx === 0 || idx === CLUSTERS.length - 1;
+            const Icon = c.icon;
+            const featured = idx === 0;
+            const style = cardStyles[c.tone];
             return (
-              <div
+              <article
                 key={c.name}
-                className={`group relative flex flex-col rounded-2xl border bg-white p-6 transition-all hover:-translate-y-1 md:p-8 ${
-                  featured ? "lg:col-span-2" : ""
+                className={`group relative flex min-h-72 flex-col overflow-hidden rounded-2xl border p-6 shadow-sm backdrop-blur-md transition duration-300 motion-reduce:transition-none md:p-7 lg:min-h-80 ${
+                  featured ? "lg:col-span-6" : idx < 3 ? "lg:col-span-3" : "lg:col-span-4"
                 }`}
                 style={{
-                  borderColor: BORDER,
-                  boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
+                  background: style.background,
+                  borderColor: style.borderColor,
+                  boxShadow: "0 12px 36px rgba(26, 58, 92, 0.07)",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.boxShadow = "0 12px 32px rgba(26,58,92,0.10)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.boxShadow = "0 2px 16px rgba(0,0,0,0.04)")
-                }
               >
-                <div className="mb-4 flex items-center gap-3">
+                {featured && (
                   <span
-                    className="flex h-10 w-10 items-center justify-center rounded-lg"
-                    style={{ background: SURFACE, color: NAVY }}
+                    className="mb-5 w-fit rounded-full border px-3 py-1 text-xs font-semibold"
+                    style={{ borderColor: "rgba(255,255,255,0.3)", color: GOLD }}
                   >
-                    <MapPin size={20} />
+                    Main service corridor
                   </span>
-                  <h3 className="text-lg font-bold md:text-xl" style={{ color: NAVY }}>
+                )}
+                <div className="mb-5 flex items-start gap-3">
+                  <span
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/70"
+                    style={{ background: style.iconBackground, color: featured ? GOLD : NAVY }}
+                  >
+                    <Icon aria-hidden="true" size={21} strokeWidth={1.8} />
+                  </span>
+                  <h3
+                    className={`font-bold leading-snug ${featured ? "text-2xl md:text-3xl" : "text-xl"}`}
+                    style={{
+                      color: style.color,
+                      fontFamily: '"Libre Baskerville", Georgia, serif',
+                    }}
+                  >
                     {c.name}
                   </h3>
                 </div>
-                <p className="text-sm leading-relaxed" style={{ color: MUTED }}>
+                <p className="text-sm leading-relaxed" style={{ color: style.muted }}>
                   {c.tagline}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {c.localities.map((loc) => (
                     <span
                       key={loc}
-                      className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
-                      style={{ background: SURFACE, color: NAVY }}
+                      className="inline-flex items-center border-l-2 px-2 py-0.5 text-xs font-semibold"
+                      style={{
+                        background: style.tagBackground,
+                        borderColor: GOLD,
+                        color: style.tagColor,
+                      }}
                     >
                       {loc}
                     </span>
                   ))}
                 </div>
-                <div className="mt-auto pt-5">
-                  <div
-                    className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold"
-                    style={{ background: "rgba(201,168,76,0.12)", color: "#8a6f2a" }}
-                  >
-                    <HelpCircle size={12} />
+                <div className="mt-auto flex flex-col gap-4 pt-6">
+                  <p className="flex items-center gap-1.5 text-xs" style={{ color: style.muted }}>
+                    <HelpCircle aria-hidden="true" size={13} />
                     {c.note}
-                  </div>
+                  </p>
+                  <a
+                    href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
+                    aria-label={`Call EasyFind about ${c.name}`}
+                    className="inline-flex w-fit items-center gap-2 text-sm font-bold transition-[gap] duration-300 group-hover:gap-3 motion-reduce:transition-none"
+                    style={{ color: featured ? GOLD : NAVY }}
+                  >
+                    <Phone aria-hidden="true" size={15} />
+                    Call about this area
+                    <ArrowRight aria-hidden="true" size={15} />
+                  </a>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
