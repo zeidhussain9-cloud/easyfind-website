@@ -1577,37 +1577,50 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
         >
           <X size={22} />
         </button>
-        <p className="text-xs font-bold uppercase text-gold" style={{ letterSpacing: "0.14em" }}>
+        <p
+          className="text-xs font-bold uppercase"
+          style={{ color: GOLD, letterSpacing: "0.14em" }}
+        >
           EasyFind Property Solutions
         </p>
-        <h2 id="privacy-title" className="mt-3 pr-10 text-3xl font-bold text-navy">
+        <h2 id="privacy-title" className="mt-3 pr-10 text-3xl font-bold" style={{ color: NAVY }}>
           Privacy Policy
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-muted">Last updated: 17 September 2026</p>
-        <div className="mt-7 space-y-6 text-sm leading-relaxed text-muted">
+        <p className="mt-3 text-sm leading-relaxed" style={{ color: MUTED }}>
+          Last updated: 17 September 2026
+        </p>
+        <div className="mt-7 space-y-6 text-sm leading-relaxed" style={{ color: MUTED }}>
           <section>
-            <h3 className="mb-2 text-base font-bold text-navy">Information we collect</h3>
+            <h3 className="mb-2 text-base font-bold" style={{ color: NAVY }}>
+              Information we collect
+            </h3>
             <p>
               When you send an enquiry, we collect the details you provide, such as your name, phone
               number, requirement, preferred location, budget, and message.
             </p>
           </section>
           <section>
-            <h3 className="mb-2 text-base font-bold text-navy">How we use it</h3>
+            <h3 className="mb-2 text-base font-bold" style={{ color: NAVY }}>
+              How we use it
+            </h3>
             <p>
               We use this information to respond to your enquiry, understand your property
               requirement, provide requested services, and maintain necessary business records.
             </p>
           </section>
           <section>
-            <h3 className="mb-2 text-base font-bold text-navy">Form processing</h3>
+            <h3 className="mb-2 text-base font-bold" style={{ color: NAVY }}>
+              Form processing
+            </h3>
             <p>
               Enquiries may be processed through Formspree or Google Forms. Those providers process
               submitted information under their own privacy and security terms.
             </p>
           </section>
           <section>
-            <h3 className="mb-2 text-base font-bold text-navy">Sharing and retention</h3>
+            <h3 className="mb-2 text-base font-bold" style={{ color: NAVY }}>
+              Sharing and retention
+            </h3>
             <p>
               We do not sell personal information. We share it only with service providers needed to
               process enquiries, when required by law, or with your direction. We retain it only as
@@ -1615,7 +1628,9 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
             </p>
           </section>
           <section>
-            <h3 className="mb-2 text-base font-bold text-navy">Security and your choices</h3>
+            <h3 className="mb-2 text-base font-bold" style={{ color: NAVY }}>
+              Security and your choices
+            </h3>
             <p>
               We take reasonable steps to protect submitted information, but no internet
               transmission is completely secure. You may ask us to access, correct, or delete your
@@ -1623,12 +1638,15 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
             </p>
           </section>
           <section>
-            <h3 className="mb-2 text-base font-bold text-navy">Contact</h3>
+            <h3 className="mb-2 text-base font-bold" style={{ color: NAVY }}>
+              Contact
+            </h3>
             <p>
               For privacy questions or requests, email{" "}
               <a
                 href={`mailto:${BUSINESS_CONFIG.email}`}
-                className="font-semibold text-navy underline decoration-gold underline-offset-2"
+                className="font-semibold underline underline-offset-2"
+                style={{ color: NAVY, textDecorationColor: GOLD }}
               >
                 {BUSINESS_CONFIG.email}
               </a>
