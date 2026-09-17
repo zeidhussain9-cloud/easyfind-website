@@ -6,7 +6,7 @@ import { submitLead } from "@/lib/submitLead";
 // Hero "Talk to Our Expert" form — compact 3-field lead capture.
 // State is fully local; this component never reads from or writes to any
 // other form's state.
-const ContactForm: React.FC = () => {
+const ContactForm: React.FC<{ onPrivacyClick: () => void }> = ({ onPrivacyClick }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [requirement, setRequirement] = useState("");
@@ -183,6 +183,17 @@ const ContactForm: React.FC = () => {
         >
           {isSubmitting ? "Sending..." : "Get a Call Back"}
         </button>
+        <p className="text-center text-xs leading-relaxed text-gray-500">
+          By submitting, you agree to our{" "}
+          <button
+            type="button"
+            onClick={onPrivacyClick}
+            className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2"
+          >
+            Privacy Policy
+          </button>
+          .
+        </p>
       </div>
     </form>
   );

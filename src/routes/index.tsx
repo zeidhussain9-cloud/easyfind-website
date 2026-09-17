@@ -218,6 +218,10 @@ type Cluster = {
   tagline: string;
   localities: string[];
   note: string;
+  source?: {
+    label: string;
+    href: string;
+  };
 };
 
 const CLUSTERS: Cluster[] = [
@@ -227,32 +231,46 @@ const CLUSTERS: Cluster[] = [
     tone: "navy",
     tagline:
       "Our main East Bangalore corridor, connecting established office districts and residential communities along the Outer Ring Road.",
-    localities: ["Marathahalli", "Kadubeesanahalli", "Bellandur"],
-    note: "Market details: To be confirmed.",
+    localities: [
+      "Marathahalli",
+      "Kadubeesanahalli",
+      "Bellandur",
+      "Devarabeesanahalli",
+      "Doddanekkundi",
+    ],
+    note: "A continuous service corridor linking major office campuses and residential pockets along Bengaluru’s Outer Ring Road.",
   },
   {
     name: "Whitefield & ITPL Corridor",
     icon: Globe,
     tone: "blue",
     tagline: "An established East Bangalore business and residential corridor around Whitefield.",
-    localities: ["Whitefield", "ITPL"],
-    note: "Market details: To be confirmed.",
+    localities: ["Whitefield", "ITPL", "Kadugodi", "Brookefield", "Pattandur Agrahara"],
+    note: "Served by the operational Purple Line, including Whitefield (Kadugodi) and Pattandur Agrahara stations.",
+    source: {
+      label: "BMRCL network information",
+      href: "https://english.bmrc.co.in/",
+    },
   },
   {
     name: "Hoodi & Mahadevapura",
     icon: Layers,
     tone: "warm",
     tagline: "A connected service pocket between Whitefield and the Outer Ring Road corridor.",
-    localities: ["Hoodi", "Mahadevapura"],
-    note: "Market details: To be confirmed.",
+    localities: ["Hoodi", "Mahadevapura", "K.R. Puram", "Garudacharpalya", "Doddanekkundi"],
+    note: "These connected neighbourhoods sit within BBMP’s Mahadevapura administrative zone in East Bengaluru.",
+    source: {
+      label: "BBMP ward information",
+      href: "https://bbmp.gov.in/",
+    },
   },
   {
     name: "Sarjapur Road Corridor",
     icon: Home,
     tone: "white",
     tagline: "A broad residential corridor linking Sarjapur Road with nearby East Bangalore areas.",
-    localities: ["Sarjapur Road", "Kasavanahalli", "Harlur", "Varthur"],
-    note: "Market details: To be confirmed.",
+    localities: ["Sarjapur Road", "Kasavanahalli", "Harlur", "Carmelaram", "Balagere"],
+    note: "A broad south-east corridor connecting established residential pockets between the Outer Ring Road and Sarjapur.",
   },
   {
     name: "Indiranagar & Old Airport Road",
@@ -260,17 +278,20 @@ const CLUSTERS: Cluster[] = [
     tone: "blue",
     tagline:
       "Two established East Bangalore service areas with residential and commercial streets.",
-    localities: ["Indiranagar", "Old Airport Road"],
-    note: "Market details: To be confirmed.",
+    localities: ["Indiranagar", "Domlur", "C.V. Raman Nagar", "HAL", "Old Airport Road"],
+    note: "Indiranagar is served by the operational Purple Line, while Domlur and HAL connect toward Old Airport Road.",
+    source: {
+      label: "BMRCL network information",
+      href: "https://english.bmrc.co.in/",
+    },
   },
   {
-    name: "Central Bangalore Hubs",
+    name: "Koramangala & HSR Layout",
     icon: Handshake,
     tone: "warm",
-    tagline:
-      "Two established residential and commercial service areas near key employment corridors.",
-    localities: ["Koramangala", "HSR Layout"],
-    note: "Market details: To be confirmed.",
+    tagline: "Established south-east Bengaluru neighbourhoods connecting residential streets, workplaces, and everyday amenities.",
+    localities: ["Koramangala", "HSR Layout", "Agara", "Bommanahalli", "BTM Layout"],
+    note: "HSR expands to Hosur–Sarjapur Road Layout; this cluster covers nearby service areas on both sides of the corridor.",
   },
 ];
 
@@ -498,7 +519,7 @@ function SectionTitle({ children, light = false }: { children: ReactNode; light?
   );
 }
 
-function Hero() {
+function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
   return (
     <section
       id="hero"
@@ -558,7 +579,7 @@ function Hero() {
           </div>
         </div>
         <div className="relative z-10 flex items-center justify-center">
-          <ContactForm />
+          <ContactForm onPrivacyClick={onPrivacyClick} />
         </div>
       </div>
     </section>
@@ -887,21 +908,23 @@ function AreasSection() {
                     </span>
                   ))}
                 </div>
-                <div className="mt-auto flex flex-col gap-4 pt-6">
+                <div className="mt-auto flex flex-col gap-2 pt-6">
                   <p className="flex items-center gap-1.5 text-xs" style={{ color: style.muted }}>
                     <HelpCircle aria-hidden="true" size={13} />
                     {c.note}
                   </p>
-                  <a
-                    href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
-                    aria-label={`Call EasyFind about ${c.name}`}
-                    className="inline-flex w-fit items-center gap-2 text-sm font-bold transition-[gap] duration-300 group-hover:gap-3 motion-reduce:transition-none"
-                    style={{ color: featured ? GOLD : NAVY }}
-                  >
-                    <Phone aria-hidden="true" size={15} />
-                    Call about this area
-                    <ArrowRight aria-hidden="true" size={15} />
-                  </a>
+                  {c.source && (
+                    <a
+                      href={c.source.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-fit items-center gap-1 text-xs font-semibold underline underline-offset-2"
+                      style={{ color: featured ? GOLD : NAVY }}
+                    >
+                      {c.source.label}
+                      <ArrowUpRight aria-hidden="true" size={12} />
+                    </a>
+                  )}
                 </div>
               </article>
             );
@@ -1000,7 +1023,7 @@ function Reviews() {
   );
 }
 
-function LeadForm() {
+function LeadForm({ onPrivacyClick }: { onPrivacyClick: () => void }) {
   // Independent state — never reads from or writes to the hero form.
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -1185,7 +1208,15 @@ function LeadForm() {
                   {isSubmitting ? "Sending..." : "Submit Requirement"}
                 </button>
                 <p className="text-center text-xs font-medium text-gray-400">
-                  We will get back to you shortly. No spam. No sharing of your data.
+                  We will get back to you shortly. By submitting, you agree to our{" "}
+                  <button
+                    type="button"
+                    onClick={onPrivacyClick}
+                    className="font-semibold text-navy underline decoration-gold underline-offset-2"
+                  >
+                    Privacy Policy
+                  </button>
+                  .
                 </p>
               </form>
             )}
@@ -1199,18 +1230,8 @@ function LeadForm() {
               We're Just a Message Away
             </h2>
             <div className="space-y-10">
-              <div className="flex gap-6">
-                <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
-                  style={{ background: SURFACE, color: NAVY }}
-                >
-                  <Phone size={24} />
-                </div>
-                <div>
-                  <div className="text-sm font-bold uppercase tracking-wider text-gray-400">
-                    Call Us
-                  </div>
-                  <div className="mt-1 text-sm text-gray-500">Available 10 AM - 7 PM</div>
+              <div>
+                <div className="text-sm text-gray-500">Available 10 AM - 7 PM</div>
                   <a
                     href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
                     className="mt-3 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold shadow-sm transition-transform hover:-translate-y-0.5"
@@ -1219,7 +1240,6 @@ function LeadForm() {
                     <Phone size={16} />
                     Call Us Now
                   </a>
-                </div>
               </div>
               <div className="flex gap-6">
                 <div
@@ -1293,7 +1313,7 @@ function LeadForm() {
   );
 }
 
-function Footer() {
+function Footer({ onPrivacyClick }: { onPrivacyClick: () => void }) {
   return (
     <footer
       className="pt-20 pb-10 text-white"
@@ -1505,8 +1525,15 @@ function Footer() {
           className="mt-8 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row"
           style={{ borderColor: "rgba(255,255,255,0.08)" }}
         >
-          <div className="text-xs font-medium text-white/50">
-            © EasyFind Property Solutions. All rights reserved.
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium text-white/50 md:justify-start">
+            <span>© EasyFind Property Solutions. All rights reserved.</span>
+            <button
+              type="button"
+              onClick={onPrivacyClick}
+              className="font-semibold text-white/70 underline decoration-gold underline-offset-4 transition-colors hover:text-white"
+            >
+              Privacy Policy
+            </button>
           </div>
           <div className="text-xs font-bold uppercase tracking-widest text-white/30">
             Designed for trust in Bengaluru
@@ -1517,21 +1544,58 @@ function Footer() {
   );
 }
 
+function PrivacyModal({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => event.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+      <button className="absolute inset-0 bg-navy/70 backdrop-blur-sm" onClick={onClose} aria-label="Close privacy policy" />
+      <div className="relative max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl md:p-9">
+        <button type="button" onClick={onClose} className="absolute right-4 top-4 rounded-md p-2 text-navy/60 hover:bg-surface hover:text-navy" aria-label="Close privacy policy">
+          <X size={22} />
+        </button>
+        <p className="text-xs font-bold uppercase text-gold" style={{ letterSpacing: "0.14em" }}>EasyFind Property Solutions</p>
+        <h2 id="privacy-title" className="mt-3 pr-10 text-3xl font-bold text-navy">Privacy Policy</h2>
+        <p className="mt-3 text-sm leading-relaxed text-muted">Last updated: 17 September 2026</p>
+        <div className="mt-7 space-y-6 text-sm leading-relaxed text-muted">
+          <section><h3 className="mb-2 text-base font-bold text-navy">Information we collect</h3><p>When you send an enquiry, we collect the details you provide, such as your name, phone number, requirement, preferred location, budget, and message.</p></section>
+          <section><h3 className="mb-2 text-base font-bold text-navy">How we use it</h3><p>We use this information to respond to your enquiry, understand your property requirement, provide requested services, and maintain necessary business records.</p></section>
+          <section><h3 className="mb-2 text-base font-bold text-navy">Form processing</h3><p>Enquiries may be processed through Formspree or Google Forms. Those providers process submitted information under their own privacy and security terms.</p></section>
+          <section><h3 className="mb-2 text-base font-bold text-navy">Sharing and retention</h3><p>We do not sell personal information. We share it only with service providers needed to process enquiries, when required by law, or with your direction. We retain it only as long as reasonably needed for these purposes and applicable obligations.</p></section>
+          <section><h3 className="mb-2 text-base font-bold text-navy">Security and your choices</h3><p>We take reasonable steps to protect submitted information, but no internet transmission is completely secure. You may ask us to access, correct, or delete your enquiry information, subject to legal requirements.</p></section>
+          <section><h3 className="mb-2 text-base font-bold text-navy">Contact</h3><p>For privacy questions or requests, email <a href={`mailto:${BUSINESS_CONFIG.email}`} className="font-semibold text-navy underline decoration-gold underline-offset-2">{BUSINESS_CONFIG.email}</a>.</p></section>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Index() {
+  const [showPrivacy, setShowPrivacy] = useState(false);
+
   return (
     <div className="min-h-screen bg-white" style={{ color: TEXT, fontFamily: "Inter, sans-serif" }}>
       <Nav />
       <main>
-        <Hero />
+        <Hero onPrivacyClick={() => setShowPrivacy(true)} />
         <TrackRecord />
         <Services />
         <HowItWorks />
         <AreasSection />
         <WhyUs />
         <Reviews />
-        <LeadForm />
+        <LeadForm onPrivacyClick={() => setShowPrivacy(true)} />
       </main>
-      <Footer />
+      <Footer onPrivacyClick={() => setShowPrivacy(true)} />
+      {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
     </div>
   );
 }
