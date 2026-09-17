@@ -1577,10 +1577,7 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
         >
           <X size={22} />
         </button>
-        <p
-          className="text-xs font-bold uppercase"
-          style={{ color: GOLD, letterSpacing: "0.14em" }}
-        >
+        <p className="text-xs font-bold uppercase" style={{ color: GOLD, letterSpacing: "0.14em" }}>
           EasyFind Property Solutions
         </p>
         <h2 id="privacy-title" className="mt-3 pr-10 text-3xl font-bold" style={{ color: NAVY }}>
