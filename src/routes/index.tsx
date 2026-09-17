@@ -289,7 +289,8 @@ const CLUSTERS: Cluster[] = [
     name: "Koramangala & HSR Layout",
     icon: Handshake,
     tone: "warm",
-    tagline: "Established south-east Bengaluru neighbourhoods connecting residential streets, workplaces, and everyday amenities.",
+    tagline:
+      "Established south-east Bengaluru neighbourhoods connecting residential streets, workplaces, and everyday amenities.",
     localities: ["Koramangala", "HSR Layout", "Agara", "Bommanahalli", "BTM Layout"],
     note: "HSR expands to Hosur–Sarjapur Road Layout; this cluster covers nearby service areas on both sides of the corridor.",
   },
@@ -1232,14 +1233,14 @@ function LeadForm({ onPrivacyClick }: { onPrivacyClick: () => void }) {
             <div className="space-y-10">
               <div>
                 <div className="text-sm text-gray-500">Available 10 AM - 7 PM</div>
-                  <a
-                    href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
-                    className="mt-3 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold shadow-sm transition-transform hover:-translate-y-0.5"
-                    style={{ background: GOLD, color: NAVY }}
-                  >
-                    <Phone size={16} />
-                    Call Us Now
-                  </a>
+                <a
+                  href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
+                  className="mt-3 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold shadow-sm transition-transform hover:-translate-y-0.5"
+                  style={{ background: GOLD, color: NAVY }}
+                >
+                  <Phone size={16} />
+                  Call Us Now
+                </a>
               </div>
               <div className="flex gap-6">
                 <div
@@ -1556,22 +1557,84 @@ function PrivacyModal({ onClose }: { onClose: () => void }) {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
-      <button className="absolute inset-0 bg-navy/70 backdrop-blur-sm" onClick={onClose} aria-label="Close privacy policy" />
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="privacy-title"
+    >
+      <button
+        className="absolute inset-0 bg-navy/70 backdrop-blur-sm"
+        onClick={onClose}
+        aria-label="Close privacy policy"
+      />
       <div className="relative max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl md:p-9">
-        <button type="button" onClick={onClose} className="absolute right-4 top-4 rounded-md p-2 text-navy/60 hover:bg-surface hover:text-navy" aria-label="Close privacy policy">
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-4 top-4 rounded-md p-2 text-navy/60 hover:bg-surface hover:text-navy"
+          aria-label="Close privacy policy"
+        >
           <X size={22} />
         </button>
-        <p className="text-xs font-bold uppercase text-gold" style={{ letterSpacing: "0.14em" }}>EasyFind Property Solutions</p>
-        <h2 id="privacy-title" className="mt-3 pr-10 text-3xl font-bold text-navy">Privacy Policy</h2>
+        <p className="text-xs font-bold uppercase text-gold" style={{ letterSpacing: "0.14em" }}>
+          EasyFind Property Solutions
+        </p>
+        <h2 id="privacy-title" className="mt-3 pr-10 text-3xl font-bold text-navy">
+          Privacy Policy
+        </h2>
         <p className="mt-3 text-sm leading-relaxed text-muted">Last updated: 17 September 2026</p>
         <div className="mt-7 space-y-6 text-sm leading-relaxed text-muted">
-          <section><h3 className="mb-2 text-base font-bold text-navy">Information we collect</h3><p>When you send an enquiry, we collect the details you provide, such as your name, phone number, requirement, preferred location, budget, and message.</p></section>
-          <section><h3 className="mb-2 text-base font-bold text-navy">How we use it</h3><p>We use this information to respond to your enquiry, understand your property requirement, provide requested services, and maintain necessary business records.</p></section>
-          <section><h3 className="mb-2 text-base font-bold text-navy">Form processing</h3><p>Enquiries may be processed through Formspree or Google Forms. Those providers process submitted information under their own privacy and security terms.</p></section>
-          <section><h3 className="mb-2 text-base font-bold text-navy">Sharing and retention</h3><p>We do not sell personal information. We share it only with service providers needed to process enquiries, when required by law, or with your direction. We retain it only as long as reasonably needed for these purposes and applicable obligations.</p></section>
-          <section><h3 className="mb-2 text-base font-bold text-navy">Security and your choices</h3><p>We take reasonable steps to protect submitted information, but no internet transmission is completely secure. You may ask us to access, correct, or delete your enquiry information, subject to legal requirements.</p></section>
-          <section><h3 className="mb-2 text-base font-bold text-navy">Contact</h3><p>For privacy questions or requests, email <a href={`mailto:${BUSINESS_CONFIG.email}`} className="font-semibold text-navy underline decoration-gold underline-offset-2">{BUSINESS_CONFIG.email}</a>.</p></section>
+          <section>
+            <h3 className="mb-2 text-base font-bold text-navy">Information we collect</h3>
+            <p>
+              When you send an enquiry, we collect the details you provide, such as your name, phone
+              number, requirement, preferred location, budget, and message.
+            </p>
+          </section>
+          <section>
+            <h3 className="mb-2 text-base font-bold text-navy">How we use it</h3>
+            <p>
+              We use this information to respond to your enquiry, understand your property
+              requirement, provide requested services, and maintain necessary business records.
+            </p>
+          </section>
+          <section>
+            <h3 className="mb-2 text-base font-bold text-navy">Form processing</h3>
+            <p>
+              Enquiries may be processed through Formspree or Google Forms. Those providers process
+              submitted information under their own privacy and security terms.
+            </p>
+          </section>
+          <section>
+            <h3 className="mb-2 text-base font-bold text-navy">Sharing and retention</h3>
+            <p>
+              We do not sell personal information. We share it only with service providers needed to
+              process enquiries, when required by law, or with your direction. We retain it only as
+              long as reasonably needed for these purposes and applicable obligations.
+            </p>
+          </section>
+          <section>
+            <h3 className="mb-2 text-base font-bold text-navy">Security and your choices</h3>
+            <p>
+              We take reasonable steps to protect submitted information, but no internet
+              transmission is completely secure. You may ask us to access, correct, or delete your
+              enquiry information, subject to legal requirements.
+            </p>
+          </section>
+          <section>
+            <h3 className="mb-2 text-base font-bold text-navy">Contact</h3>
+            <p>
+              For privacy questions or requests, email{" "}
+              <a
+                href={`mailto:${BUSINESS_CONFIG.email}`}
+                className="font-semibold text-navy underline decoration-gold underline-offset-2"
+              >
+                {BUSINESS_CONFIG.email}
+              </a>
+              .
+            </p>
+          </section>
         </div>
       </div>
     </div>
