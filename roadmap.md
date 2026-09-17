@@ -4,4 +4,4 @@
 - [x] Replace cluster placeholders with sourced current facts.
 - [x] Simplify the contact phone treatment to one CTA.
 - [x] Add and link a privacy policy beside both forms and in the footer.
-- [ ] Verify desktop, tablet, mobile, forms, policy, console, build, and GitHub sync state.
+- [x] Verify desktop, tablet, mobile, forms, policy, console, build, and GitHub sync state.
