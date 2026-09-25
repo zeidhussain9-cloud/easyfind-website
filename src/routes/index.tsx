@@ -396,7 +396,7 @@ function Nav() {
           boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.05)" : "none",
         }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-5 sm:py-4 md:px-8">
           <Logo />
           <nav className="hidden items-center gap-8 md:flex">
             {NAV_LINKS.map((l) => (
@@ -435,11 +435,11 @@ function Nav() {
           </div>
           <a
             href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
-            className="hidden items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold md:inline-flex"
+            className="hidden items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold shadow-sm transition-transform hover:-translate-y-0.5 md:inline-flex"
             style={{ background: GOLD, color: NAVY }}
           >
             <Phone size={16} />
-            Call Us
+            Talk to EasyFind
           </a>
         </div>
 
@@ -478,12 +478,12 @@ function Nav() {
               ))}
               <a
                 href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, "")}`}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg px-6 py-4 text-lg font-bold shadow-lg"
+                className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg px-6 py-4 text-lg font-bold shadow-lg"
                 style={{ background: GOLD, color: NAVY }}
                 onClick={() => setOpen(false)}
               >
                 <Phone size={20} />
-                Call Us
+                Talk to EasyFind
               </a>
             </div>
           </div>
@@ -524,7 +524,7 @@ function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[90vh] items-center pt-24 md:pt-32"
+      className="relative flex min-h-[100svh] items-center overflow-hidden pb-12 pt-24 sm:pb-16 md:min-h-[90vh] md:pb-20 md:pt-32"
       style={{ background: NAVY }}
     >
       <div
@@ -535,8 +535,8 @@ function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 lg:grid-cols-2 md:px-8">
-        <div className="flex flex-col justify-center text-center lg:text-left items-center lg:items-start">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-5 sm:gap-10 md:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:gap-12">
+        <div className="flex min-w-0 flex-col items-center justify-center text-center lg:items-start lg:text-left">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white/90">
             <span className="flex h-2 w-2 rounded-full bg-green-400 animate-pulse" />
             Bangalore's Trusted Property Partner
@@ -545,7 +545,7 @@ function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
             className="font-bold text-white"
             style={{
               fontFamily: "'Playfair Display', Inter, serif",
-              fontSize: "clamp(34px, 5.5vw, 60px)",
+              fontSize: "clamp(34px, 7vw, 60px)",
               lineHeight: 1.05,
               letterSpacing: "-0.02em",
             }}
@@ -562,24 +562,24 @@ function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
             Solutions handles it all across Bangalore. We help owners and clients move faster, avoid
             delays, and make the right decisions.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+          <div className="mt-8 flex w-full max-w-xl flex-col items-stretch justify-center gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4 lg:justify-start">
             <button
               onClick={() => scrollToId("#lead-form")}
-              className="rounded-lg px-8 py-4 text-base font-bold shadow-lg transition-transform hover:-translate-y-1"
+              className="min-h-12 rounded-lg px-6 py-3.5 text-base font-bold shadow-lg transition-transform hover:-translate-y-1 sm:px-8 sm:py-4"
               style={{ background: GOLD, color: NAVY }}
             >
-              Talk to Us
+              I’m looking for a property
             </button>
             <button
               onClick={() => scrollToId("#how-it-works")}
-              className="rounded-lg border-2 px-8 py-4 text-base font-bold text-white transition-all hover:bg-white/10"
+              className="min-h-12 rounded-lg border-2 px-6 py-3.5 text-base font-bold text-white transition-all hover:bg-white/10 sm:px-8 sm:py-4"
               style={{ borderColor: "rgba(255,255,255,0.3)" }}
             >
-              How It Works
+              I own a property
             </button>
           </div>
         </div>
-        <div className="relative z-10 flex items-center justify-center">
+        <div className="relative z-10 flex w-full items-center justify-center lg:justify-end">
           <ContactForm onPrivacyClick={onPrivacyClick} />
         </div>
       </div>
