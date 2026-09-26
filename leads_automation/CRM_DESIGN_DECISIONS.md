@@ -76,20 +76,7 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 - [x] **D03.9 — Activity timeline:** chronological record of human edits, classification, status/priority, follow-ups, requirement changes, AI runs/drafts, property actions and system events as those capabilities are added; human/system distinction is visible.
 - [x] **D03.10 — Lead merge/split:** advanced overflow action with side-by-side preview, resulting identity/source/history preview, explicit confirmation, audit trail, Keep Separate option, and reversible split later without losing history.
 
-### 4. AI intelligence and reply drafting
-
-- [ ] **D04.1 — AI entry points:** exact buttons and placements (Analyze New Messages, Generate Reply, Full Re-analysis).
-- [ ] **D04.2 — First analysis experience:** review the initial AI summary, extracted requirements, missing questions and proposed reply.
-- [ ] **D04.3 — Incremental analysis:** show new messages since last analysis and what changed.
-- [ ] **D04.4 — AI memory display:** approve summary, confirmed requirements, open questions and history layout.
-- [ ] **D04.5 — Requirement proposals:** accept/reject/edit AI suggestions; never silently overwrite human values.
-- [ ] **D04.6 — Draft editor:** generated text, manual edits, regenerate, copy and open WhatsApp.
-- [ ] **D04.7 — Draft history:** version list, timestamps, previous text, model/run linkage and draft status.
-- [ ] **D04.8 — Sent-state truth:** define how to distinguish copied/opened from confirmed sent and from observed outgoing WhatsApp messages.
-- [ ] **D04.9 — Cost transparency:** show whether a button triggers an AI call; avoid hidden calls.
-- [ ] **D04.10 — AI failure states:** handle insufficient context, low confidence, API error and stale inventory.
-
-### 5. Inventory experience
+### 4. AI intelligence and reply drafting\n\n**APPROVED 8/8; detailed superseding checklist below.**\n\n### 5. Inventory experience
 
 - [ ] **D05.1 — Inventory entry:** global Inventory screen and contextual Matches panel within each lead.
 - [ ] **D05.2 — Match card:** listing ID, verified locality, BHK, rent, furnishing, availability, match explanation and missing information.
@@ -200,7 +187,7 @@ This map defines what each UI area is intended to read from or write to. It dist
 | 2026-09-26 | **D01.5 approved**: top-bar persistent controls with dropdown source/filter controls | Owner approved the dropdown UI version; page-specific filters remain compact dropdowns instead of a permanent sidebar. |
 | 2026-09-26 | **Figma approved as the ongoing design workspace** | Owner explicitly requested Figma for design help going forward. |
 
-## D02 review package — pending owner approval
+## D02 review package — approved (historical)
 
 The following D02.3–D02.9 decisions are being presented together for one visual approval pass. Until the owner explicitly approves the package, they remain unchecked.
 
@@ -274,7 +261,7 @@ Every reclassification creates an activity/audit event and preserves the origina
 Approve all D02.3–D02.9 together as proposed, or specify only the item(s) to change. Approval means **design approved**, not implementation complete.
 
 
-## D03 review package — pending owner approval
+## D03 review package — approved (historical)
 
 The following D03.1–D03.10 decisions are being presented together for one visual approval pass. Until explicitly approved, they remain unchecked.
 
@@ -390,6 +377,19 @@ Approve all D03.1–D03.10 together as proposed, or specify only the item(s) to 
 
 The UI dashboard is deployed from the repository **`zeidhussain9-cloud/easyfind-website`**, on branch **`feature/leads-automation`**, with Render service **`leads-ui-dashboard`** using root directory **`leads_automation/leads-ui`**. The design branch is used for design documentation/work; approved changes are synchronized into the deployment branch deliberately. Nothing in the design process should target `main` unless separately approved.
 
-## Next question
+## Next section\n\nD05 Inventory Experience — proposed, awaiting review.\n
 
-**D01.6 — Loading, empty and error states.** Decide what the user sees when a page is loading, has no records, has stale data, or a source (Google Sheets, webhook stream, AI or inventory) is temporarily unavailable.
+## D04 approved design handoff — 2026-09-26
+**D04.1–D04.8 APPROVED (8/8); design only, not implemented.** Supersedes the earlier ten-item D04 placeholder. D05 Inventory Experience remains proposed (0/7).
+- [x] D04.1 AI workspace: previous runs, saved intelligence, new messages, latest draft; explicit AI actions only. No AI call on open, search, filter, manual edit or copy.
+- [x] D04.2 First analysis: full relevant available conversation across linked EFPS numbers, human-confirmed values, source attribution, incomplete-history warning.
+- [x] D04.3 Saved intelligence: versioned intelligence, append-only requirement changes and evidence, immutable AI runs, exact successfully analyzed message IDs and per-source cursor.
+- [x] D04.4 Subsequent runs: saved intelligence + new message IDs + recent human edits + relevant older context; explicit full reanalysis; cursor advances only after durable commit.
+- [x] D04.5 Requirement review: current/proposed side by side, source evidence, uncertainty, individual Accept/Reject/Edit, human authority and audit.
+- [x] D04.6 Draft editor: versioned editable drafts, regenerate, save, approve, copy, discard, verified inventory references. Copy/open is not sent; sent needs observed outgoing message or explicit operator confirmation. No automatic send in v1.
+- [x] D04.7 AI run and draft history: every attempt, including failures, analyzed message IDs, model/prompt, previous/resulting intelligence, output/error, draft version/status and usage when known.
+- [x] D04.8 Failure/cost/recovery: visible processing, partial, failed, stale, retry states; correlation ID and idempotent retry; unknown provider cost is not zero; failure does not advance cursor; no silent failures.
+Approved Figma: https://www.figma.com/design/PBiMGsVQ0fVpSf39WwNmKb?node-id=16-2 ; https://www.figma.com/design/PBiMGsVQ0fVpSf39WwNmKb?node-id=20-2 . Field maps: node-id=16-110 and node-id=20-164 in the same file. Illustrative records are not live data.
+Existing repository Leads, Conversations and Events are documented. Proposed Lead Sources, Customer Intelligence, Requirement History, AI Runs, Reply Drafts, Webhook Events, Inventory and Lead Property Matches require schema/live-data audit. Preserve EFPS source per message. Live inventory schema and rows remain unverified.
+Deployment boundary: repo zeidhussain9-cloud/easyfind-website, Render leads-ui-dashboard, deployed branch feature/leads-automation, root leads_automation/leads-ui. Design branch feature/leads-crm-architecture. Do not merge CRM into main. Documentation changes do not implement functionality.
+D05 preview pending approval: D05.1 global Inventory + per-lead Matches; D05.2 verified match cards; D05.3 mandatory/flexible/unknown criteria; D05.4 manual pin/exclude/override with reason; D05.5 freshness; D05.6 verified share preparation; D05.7 lead property history.
