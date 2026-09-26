@@ -174,6 +174,64 @@ app.get('/api/sheet-info', async (req, res) => {
   }
 });
 
+
+function sheetRange(title, columns='A:Z') {
+  return "'" + title.replace(/'/g, "''") + "'!" + columns;
+}
+async function findTab(name) {
+  const spreadsheetId=process.env.SHEET_ID;
+  if(!sheets || !spreadsheetId) throw Error('Google Sheets is not configured');
+  const result=await sheets.spreadsheets.get({spreadsheetId,fields:'sheets(properties(title,hidden,gridProperties(rowCount)))'});
+  return (result.data.sheets||[]).map(x=>x.properties).find(x=>!x.hidden && x.title.toLowerCase()===name.toLowerCase());
+}
+async function readTab(name, columns='A:Z') {
+  const tab=await findTab(name);
+  if(!tab) return null;
+  const result=await sheets.spreadsheets.values.get({spreadsheetId:process.env.SHEET_ID,range:sheetRange(tab.title,columns)});
+  const values=result.data.values||[];
+  const headers=values[0]||[];
+  return {title:tab.title,headers,rows:values.slice(1).filter(row=>row.some(v=>String(v||'').trim())).map(row=>Object.fromEntries(headers.map((h,i)=>[h,row[i]??''])))};
+}
+function normalizePhone(value){return String(value||'').replace(/\D/g,'');}
+// All routes below inherit requireLogin. No raw conversation dump or diagnostics are public.
+app.get('/api/data-audit',async(req,res)=>{
+  try {
+    const metadata=await sheets.spreadsheets.get({spreadsheetId:process.env.SHEET_ID,fields:'sheets(properties(title,hidden))'});
+    const tabs=await Promise.all((metadata.data.sheets||[]).filter(s=>!s.properties.hidden).map(async s=>{
+      const title=s.properties.title;
+      const data=await sheets.spreadsheets.values.get({spreadsheetId:process.env.SHEET_ID,range:sheetRange(title,'A1:AZ1')});
+      return {name:title,headers:(data.data.values||[])[0]||[]};
+    }));
+    res.set('Cache-Control','no-store').json({success:true,tabs});
+  } catch(error){console.error('Data audit error:',error.message);res.status(500).json({error:'Unable to inspect worksheet metadata'});}
+});
+app.get('/api/conversations/:phone',async(req,res)=>{
+  try{
+    const phone=normalizePhone(req.params.phone);
+    if(phone.length<10||phone.length>15)return res.status(400).json({error:'Invalid phone number'});
+    const data=await readTab('Conversations','A:Q');
+    if(!data)return res.status(404).json({error:'Conversations worksheet not found'});
+    const messages=data.rows.filter(r=>normalizePhone(r['Phone Number'])===phone).map(r=>({
+      id:r['Message ID']||'',direction:r['Direction']||'',body:r['Message Body']||'',
+      type:r['Message Type']||'',sender:r['Sender Name']||'',timestamp:r['Timestamp']||'',
+      requiresFollowup:r['Requires Followup']||''
+    }));
+    res.set('Cache-Control','no-store').json({success:true,count:messages.length,messages});
+  }catch(error){console.error('Conversation fetch error:',error.message);res.status(500).json({error:'Unable to retrieve conversation history'});}
+});
+app.get('/api/events/:phone',async(req,res)=>{
+  try{
+    const phone=normalizePhone(req.params.phone);
+    if(phone.length<10||phone.length>15)return res.status(400).json({error:'Invalid phone number'});
+    const data=await readTab('Events','A:I');
+    if(!data)return res.status(404).json({error:'Events worksheet not found'});
+    const events=data.rows.filter(r=>normalizePhone(r['Phone Number'])===phone).map(r=>({
+      type:r['Event Type']||'',description:r['Event Description']||'',timestamp:r['Timestamp']||'',triggeredBy:r['Triggered By']||''
+    }));
+    res.set('Cache-Control','no-store').json({success:true,count:events.length,events});
+  }catch(error){console.error('Event fetch error:',error.message);res.status(500).json({error:'Unable to retrieve activity history'});}
+});
+
 // Start server
 app.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT}`);
