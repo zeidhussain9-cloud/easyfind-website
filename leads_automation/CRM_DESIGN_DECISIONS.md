@@ -53,7 +53,7 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 
 ### 2. Inbox and lead qualification
 
-- [ ] **D02.1 — Inbox eligibility:** which classification categories appear in the main working inbox; what happens to Cold Inquiry and Property Listing Sent.
+- [x] **D02.1 — Inbox eligibility:** the primary working Inbox shows **Qualified Leads**. **Cold Inquiry / uncertain conversations go to a separate Review Queue** so everything potentially relevant remains reviewable. Other categories (Agent/Partner, Vendor/Supplier, Personal/Family, Spam/Marketing, Internal) remain outside the main lead inbox but are retained in the raw/archive layer and can be reclassified or reviewed when appropriate. **Property Listing Sent** is handled outside the primary qualified-lead inbox unless later reclassified.
 - [x] **D02.2 — Customer identity:** show and progressively populate the customer's name wherever available (dashboard recent activity, inbox row, lead header, conversation where appropriate, follow-ups, inventory matches/sharing and activity); fall back to phone when the name is unknown. Preserve source-number attribution when the same customer appears across multiple EFPS numbers. Exact name-verification/edit controls remain for D03.1/D03.6.
 - [ ] **D02.3 — Lead-row content:** agree compact row fields (name/number, BHK, location, source, status, last interaction, unread/new-activity marker).
 - [ ] **D02.4 — Sorting:** default order and alternate sorts (latest activity, priority, follow-up due).
