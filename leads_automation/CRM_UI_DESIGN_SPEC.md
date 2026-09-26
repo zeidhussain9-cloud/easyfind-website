@@ -1,6 +1,6 @@
 # EasyFind CRM — UI Design Specification
 
-**Status:** Design in progress; D01 and D02 approved  
+**Status:** Design in progress; D01, D02 and D03 approved  
 **Working branch:** `feature/leads-crm-architecture`  
 **Visual workspace:** [Figma — EasyFind CRM — Design System & Lead Inbox](https://www.figma.com/design/PBiMGsVQ0fVpSf39WwNmKb)  
 **Visual baseline:** [Approved Canva CRM concept](https://canva.link/qmph6ij1o6lue57)  
@@ -189,6 +189,33 @@ Every displayed value should be treated as one of:
 Design mockups use illustrative records only and must not be mistaken for live customers or live properties.
 
 
+## 9. Lead workspace (D03 approved)
+
+The individual lead workspace is a logical dedicated CRM workspace assembled from linked records; it is not a physical spreadsheet tab.
+
+### Header
+Name first when known; phone as stable identifier; direct WhatsApp action; EFPS source badge(s); classification; status; priority; last/new activity state.
+
+### Conversation timeline
+The chronological timeline is reconstructed from normalized conversation records. Each message carries its timestamp, direction, sender/source context, message type and body. Those stored timestamps create the date separators/grouping shown by the UI. All messages for that customer are retained and displayed within the lead's conversation context. Source WhatsApp attribution is preserved separately so one customer can span multiple EFPS source numbers.
+
+AI-generated drafts are never written into the observed conversation stream.
+
+### Historical coverage
+Show first/latest available dates and a visible incomplete/partial-history state whenever completeness is not proven. Never label a limited extraction as the complete customer history.
+
+### Requirements
+Current requirement fields are editable. Unknown/unconfirmed values are explicit. Human edits become authoritative and are recorded in history.
+
+### Provenance
+Important values can be identified as Human, AI, Source-message-backed or System, with detail available on demand.
+
+### Follow-up and activity
+Follow-up state and the chronological activity/audit stream live in the workspace and are also surfaced in the global Follow-ups/Activity views.
+
+### AI run persistence
+Every future AI execution for a lead creates an immutable AI Run record. At minimum, the run records which lead was analyzed, when it ran, which message state/context version was examined, the prior AI-memory version used, structured findings/changes and any draft produced. Later AI calls use the saved state plus the newly available conversation delta and can identify exactly what work has happened since the previous run.
+
 ## 11. Lead workspace design (D03 proposal)
 
 The D03 visual-review package proposes the following lead workspace behavior. These are design proposals until D03.1–D03.10 are approved in `CRM_DESIGN_DECISIONS.md`.
@@ -242,7 +269,7 @@ When finalized, the design must preserve:
 **9/9 approved**
 
 ### D03 — Lead workspace
-10 decisions — **visual review in progress**
+**10/10 approved**
 
 ### D04 — AI intelligence and reply drafting
 Not yet reviewed
