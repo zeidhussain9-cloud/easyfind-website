@@ -49,7 +49,7 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 - [x] **D01.3 — Desktop structure:** approved **Tabbed Lead Workspace (Option A)** as the primary lead-detail experience. The selected lead opens a focused workspace with a lead header and tabs, while the Inbox remains the separate place for browsing/switching leads. A compact Overview can surface key details, latest conversation, AI draft and matching properties without forcing all detailed panels to remain permanently visible.
 - [x] **D01.4 — Mobile structure:** approved the visual flow **Inbox → Lead Workspace → tabbed sections**, with compact fixed actions such as WhatsApp and Generate AI Reply. Avoid an endless single-page scroll for lead detail.
 - [x] **D01.5 — Persistent controls:** approved **top-bar control layout** shown in the visual comparison: global search, WhatsApp source dropdown, data/refresh status and account menu stay in the top bar. Page-specific filters use dropdown controls in the page content rather than a permanently visible filter sidebar. This preserves the clean, spacious CRM layout.
-- [ ] **D01.6 — Empty/loading/error states:** define what the user sees when a tab is empty, data is loading or Sheets is unavailable.
+- [x] **D01.6 — Loading, empty and error states:** approved with strict **NO SILENT FAILURE**. Use skeleton loading, explicit useful empty states, inline errors with Retry, and visible freshness/stale indicators. Every meaningful failure, retry, stale-data condition and processing exception must be logged and mapped to a user-visible state when it affects the operator. No silent drop or misleading stale/current presentation.
 
 ### 2. Inbox and lead qualification
 
@@ -65,16 +65,16 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 
 ### 3. Individual lead workspace
 
-- [ ] **D03.1 — Lead header:** visual flow approved in principle: display available customer name (otherwise phone), click-to-WhatsApp, source-number badges, classification, status and last activity. Exact header field hierarchy remains to be finalized.
-- [ ] **D03.2 — Conversation view:** incoming/outgoing bubbles, dates, source number, media placeholders and jump to latest.
-- [ ] **D03.3 — Historical coverage:** display first/last available message dates and clearly identify gaps; never imply the archive is complete if it is not.
-- [ ] **D03.4 — Requirements panel:** approve visible fields and ordering (BHK, location, budget, furnishing, move-in, tenant type, pets, parking, notes).
-- [ ] **D03.5 — Provenance:** display AI-extracted, user-edited and message-supported values without clutter.
-- [ ] **D03.6 — Manual editing:** decide inline editing, save/cancel behavior, required fields and change confirmation.
-- [ ] **D03.7 — Status and priority:** approve workflow statuses, priority labels and edit controls.
-- [ ] **D03.8 — Follow-up:** next action, due date, overdue indicator and activity notes.
-- [ ] **D03.9 — Activity timeline:** show edits, analysis, drafts, property matches/shares and conversation events.
-- [ ] **D03.10 — Lead merge/split:** visual workflow for mistaken identity or duplicates.
+- [x] **D03.1 — Lead header:** name first (phone fallback), phone + direct WhatsApp, EFPS source badge(s), classification, status, priority and last/new activity. Compact and persistent across lead tabs.
+- [x] **D03.2 — Conversation view:** chronological WhatsApp-style timeline sourced from the normalized `Conversations` records, using each message's timestamp for date/time grouping, direction for Incoming/Outgoing treatment, sender/source attribution, message type, and message body. The lead-specific conversation is linked to that customer's identity; source-number linkage is preserved separately so the same customer can have conversations from multiple EFPS numbers. AI drafts are never inserted as actual conversation messages.
+- [x] **D03.3 — Historical coverage:** always show the first and latest available message dates, known gaps/partial windows, and an explicit incomplete-history state when completeness is unproven.
+- [x] **D03.4 — Requirements panel:** BHK, preferred locations, budget min/max, furnishing, occupancy/tenant type, move-in date, pet preference, parking, current requirement summary and notes; unknown/unconfirmed is explicit.
+- [x] **D03.5 — Provenance:** lightweight Human / AI / Source-message-backed / System indicators with expandable detail.
+- [x] **D03.6 — Manual editing:** inline edit → Save/Cancel; human-edited value becomes authoritative; material changes can request confirmation; manual edits do not require AI; changes are audited.
+- [x] **D03.7 — Status and priority:** compact header dropdowns; status and priority changes create auditable activity events.
+- [x] **D03.8 — Follow-up:** next date/time, next action, overdue indicator, follow-up count, quick reschedule and note; visible in Overview and Follow-ups.
+- [x] **D03.9 — Activity timeline:** chronological record of human edits, classification, status/priority, follow-ups, requirement changes, AI runs/drafts, property actions and system events as those capabilities are added; human/system distinction is visible.
+- [x] **D03.10 — Lead merge/split:** advanced overflow action with side-by-side preview, resulting identity/source/history preview, explicit confirmation, audit trail, Keep Separate option, and reversible split later without losing history.
 
 ### 4. AI intelligence and reply drafting
 
@@ -137,6 +137,14 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 - [ ] Every UI field is tagged **verified existing / proposed new / awaiting live-data audit**.
 - [ ] No AI output is presented as an observed customer fact without attribution.
 - [ ] Owner approves the design before any production UI, database, sync or webhook changes.
+
+## Cross-cutting persistence requirements approved 2026-09-26
+
+**Every AI run must be recorded.** Whenever AI is invoked for a lead, the system will preserve an immutable AI Run record containing the lead reference, execution time, model/context version, the message state examined, relevant prior AI memory/version, structured output, requirement changes, confidence/uncertainty and any draft produced. A later AI call can therefore determine exactly what was previously analyzed and what new messages or changes occurred after that run.
+
+**Conversation chronology is source-derived.** The timeline is reconstructed from normalized conversation records using stored message timestamps, direction, sender and source attribution. All messages remain tied to the lead/customer context; source-number provenance is retained separately when a customer appears across multiple EFPS numbers.
+
+**Drafts are separate from conversations.** AI-generated responses are stored as draft records and are never treated as observed WhatsApp messages. A draft being generated/copied/opened is not equivalent to it being sent.
 
 ## Non-silent failure requirement
 
@@ -377,6 +385,10 @@ Proposed advanced action:
 
 ### D03 package rule
 Approve all D03.1–D03.10 together as proposed, or specify only the item(s) to change. Approval means design approved, not implementation complete.
+
+## Design repository/deployment reference
+
+The UI dashboard is deployed from the repository **`zeidhussain9-cloud/easyfind-website`**, on branch **`feature/leads-automation`**, with Render service **`leads-ui-dashboard`** using root directory **`leads_automation/leads-ui`**. The design branch is used for design documentation/work; approved changes are synchronized into the deployment branch deliberately. Nothing in the design process should target `main` unless separately approved.
 
 ## Next question
 
