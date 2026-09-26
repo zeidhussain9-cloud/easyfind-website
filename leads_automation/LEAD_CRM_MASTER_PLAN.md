@@ -1015,4 +1015,23 @@ The design phase has now explicitly approved:
 - **Figma is the working visual-design environment going forward.** The previously approved Canva concept remains the visual baseline/reference.
 - Design decisions are being approved sequentially in `CRM_DESIGN_DECISIONS.md`; approval means design decision only, not implementation.
 
-The next unresolved design area is **Lead Inbox eligibility and qualification behavior (D02.1)**. AI-context/memory design will be handled later in its dedicated section and is intentionally not being decided yet.
+The D01 navigation and D02 inbox/qualification design areas are now approved. The next unresolved design area is **D03 — Individual Lead Workspace**. AI-context/memory design remains intentionally deferred to D04 and will not be decided early.
+
+
+## Design package status (2026-09-26)
+
+**D01 — Navigation & Information Architecture:** APPROVED (6/6)  
+**D02 — Inbox & Lead Qualification:** APPROVED (9/9)
+
+The authoritative UI design specification is `CRM_UI_DESIGN_SPEC.md`. The authoritative sequential approval checklist is `CRM_DESIGN_DECISIONS.md`. Figma is the working visual design file; Canva remains the original approved visual reference.
+
+D02 approved behavior includes:
+- Qualified Leads in the main Inbox.
+- Cold/uncertain cases in a Review Queue.
+- Name-first lead identity with phone fallback and EFPS source badges.
+- Compact operational lead rows.
+- Latest-customer-activity sorting by default.
+- Dropdown-based filters and deterministic search.
+- Operational counts for Qualified Leads, Review Queue, Needs Attention, Follow-ups Due and New Activity.
+- Explicit duplicate handling with user-controlled Merge/Keep Separate.
+- Reversible reclassification with audit history.
