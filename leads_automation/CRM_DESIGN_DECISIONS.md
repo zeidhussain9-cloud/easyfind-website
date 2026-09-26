@@ -46,8 +46,8 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 
 - [x] **D01.1 — Primary navigation:** approved after visual flow review: **Dashboard, Leads Inbox, Follow-ups, Inventory, Activity, Settings**. Clicking a lead opens its dedicated workspace (not a top-level menu item), with **Overview, Conversation, Requirements, Property Matches, AI & Drafts, Activity & History** tabs. Customer name is shown wherever available; otherwise show the phone number. The approved visual flow also shows the mobile inbox and tabbed mobile workspace.
 - [x] **D01.2 — Default landing screen:** **Main Dashboard** opens after login, with business/lead overview and navigation to the Inbox and other sections. Approved together with the visual flow.
-- [ ] **D01.3 — Desktop structure:** approve left lead list + central conversation + right intelligence/action panel versus alternate layout.
-- [ ] **D01.4 — Mobile structure:** approve inbox → individual lead → tabs/sections rather than an endless scrolling page.
+- [x] **D01.3 — Desktop structure:** approved **Tabbed Lead Workspace (Option A)** as the primary lead-detail experience. The selected lead opens a focused workspace with a lead header and tabs, while the Inbox remains the separate place for browsing/switching leads. A compact Overview can surface key details, latest conversation, AI draft and matching properties without forcing all detailed panels to remain permanently visible.
+- [x] **D01.4 — Mobile structure:** approved the visual flow **Inbox → Lead Workspace → tabbed sections**, with compact fixed actions such as WhatsApp and Generate AI Reply. Avoid an endless single-page scroll for lead detail.
 - [ ] **D01.5 — Persistent controls:** decide where global search, source selector, refresh and account/logout appear.
 - [ ] **D01.6 — Empty/loading/error states:** define what the user sees when a tab is empty, data is loading or Sheets is unavailable.
 
@@ -138,6 +138,10 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 - [ ] No AI output is presented as an observed customer fact without attribution.
 - [ ] Owner approves the design before any production UI, database, sync or webhook changes.
 
+## Figma design direction
+
+**2026-09-26:** Figma is now the preferred design workspace for future CRM design exploration, high-fidelity screens, component work and visual iteration. Canva remains the **approved visual reference** for the original restrained CRM direction; Figma is the working design environment going forward.
+
 ## Decision log
 
 | Date | Decision | Rationale |
@@ -150,7 +154,10 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 | 2026-09-26 | **D01.1 approved after visual review**: Dashboard, Inbox, Follow-ups, Inventory, Activity, Settings; lead opens a dedicated tabbed workspace | Owner explicitly approved the shown desktop/mobile navigation flow. |
 | 2026-09-26 | **D01.2 approved**: main Dashboard is the landing screen | Owner requested the Dashboard in the visual flow and approved it. |
 | 2026-09-26 | **D02.2 approved**: show customer names as soon as available, with phone fallback | Owner explicitly requested progressive name display throughout the CRM. |
+| 2026-09-26 | **D01.3 approved**: use Tabbed Lead Workspace (Option A) as the primary desktop lead-detail pattern | Owner approved the visual comparison and the focused, structured layout. |
+| 2026-09-26 | **D01.4 approved**: use tabbed lead navigation on mobile | Owner approved the mobile representation in the visual comparison. |
+| 2026-09-26 | **Figma approved as the ongoing design workspace** | Owner explicitly requested Figma for design help going forward. |
 
 ## Next question
 
-**D01.3 — Desktop structure.** The initial visual flow is approved, but decide whether the lead workspace should keep the mockup's Overview (requirements + conversation preview + reply + matches) as the default, with dedicated tabs for detailed work, or instead always show a persistent three-column workspace (lead list + full conversation + intelligence/action). Present the two options visually before requesting approval.
+**D01.5 — Persistent controls.** Decide where global search, source selector, refresh/sync status and account/logout should live across Desktop and Mobile. Visualize the options before approval.
