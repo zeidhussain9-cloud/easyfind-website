@@ -1021,7 +1021,8 @@ The D01 navigation and D02 inbox/qualification design areas are now approved. Th
 ## Design package status (2026-09-26)
 
 **D01 — Navigation & Information Architecture:** APPROVED (6/6)  
-**D02 — Inbox & Lead Qualification:** APPROVED (9/9)
+**D02 — Inbox & Lead Qualification:** APPROVED (9/9)  
+**D03 — Individual Lead Workspace:** APPROVED (10/10)  \n**D04 — AI Intelligence & Reply Drafts:** APPROVED (8/8)  \n**D05 — Inventory Experience:** PROPOSED (0/7)
 
 The authoritative UI design specification is `CRM_UI_DESIGN_SPEC.md`. The authoritative sequential approval checklist is `CRM_DESIGN_DECISIONS.md`. Figma is the working visual design file; Canva remains the original approved visual reference.
 
@@ -1035,3 +1036,19 @@ D02 approved behavior includes:
 - Operational counts for Qualified Leads, Review Queue, Needs Attention, Follow-ups Due and New Activity.
 - Explicit duplicate handling with user-controlled Merge/Keep Separate.
 - Reversible reclassification with audit history.
+
+
+## D04 approved design handoff — 2026-09-26
+**D04.1–D04.8 APPROVED (8/8); design only, not implemented.** Supersedes the earlier ten-item D04 placeholder. D05 Inventory Experience remains proposed (0/7).
+- [x] D04.1 AI workspace: previous runs, saved intelligence, new messages, latest draft; explicit AI actions only. No AI call on open, search, filter, manual edit or copy.
+- [x] D04.2 First analysis: full relevant available conversation across linked EFPS numbers, human-confirmed values, source attribution, incomplete-history warning.
+- [x] D04.3 Saved intelligence: versioned intelligence, append-only requirement changes and evidence, immutable AI runs, exact successfully analyzed message IDs and per-source cursor.
+- [x] D04.4 Subsequent runs: saved intelligence + new message IDs + recent human edits + relevant older context; explicit full reanalysis; cursor advances only after durable commit.
+- [x] D04.5 Requirement review: current/proposed side by side, source evidence, uncertainty, individual Accept/Reject/Edit, human authority and audit.
+- [x] D04.6 Draft editor: versioned editable drafts, regenerate, save, approve, copy, discard, verified inventory references. Copy/open is not sent; sent needs observed outgoing message or explicit operator confirmation. No automatic send in v1.
+- [x] D04.7 AI run and draft history: every attempt, including failures, analyzed message IDs, model/prompt, previous/resulting intelligence, output/error, draft version/status and usage when known.
+- [x] D04.8 Failure/cost/recovery: visible processing, partial, failed, stale, retry states; correlation ID and idempotent retry; unknown provider cost is not zero; failure does not advance cursor; no silent failures.
+Approved Figma: https://www.figma.com/design/PBiMGsVQ0fVpSf39WwNmKb?node-id=16-2 ; https://www.figma.com/design/PBiMGsVQ0fVpSf39WwNmKb?node-id=20-2 . Field maps: node-id=16-110 and node-id=20-164 in the same file. Illustrative records are not live data.
+Existing repository Leads, Conversations and Events are documented. Proposed Lead Sources, Customer Intelligence, Requirement History, AI Runs, Reply Drafts, Webhook Events, Inventory and Lead Property Matches require schema/live-data audit. Preserve EFPS source per message. Live inventory schema and rows remain unverified.
+Deployment boundary: repo zeidhussain9-cloud/easyfind-website, Render leads-ui-dashboard, deployed branch feature/leads-automation, root leads_automation/leads-ui. Design branch feature/leads-crm-architecture. Do not merge CRM into main. Documentation changes do not implement functionality.
+D05 preview pending approval: D05.1 global Inventory + per-lead Matches; D05.2 verified match cards; D05.3 mandatory/flexible/unknown criteria; D05.4 manual pin/exclude/override with reason; D05.5 freshness; D05.6 verified share preparation; D05.7 lead property history.
