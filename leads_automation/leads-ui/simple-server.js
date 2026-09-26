@@ -29,6 +29,21 @@ async function initializeGoogleSheets() {
   }
 }
 
+// Discover the actual worksheet title instead of assuming the default "Sheet1".
+// Prefer the Leads tab used by the lead-management sync; fall back to the
+// first visible worksheet for spreadsheets with a different naming scheme.
+async function resolveLeadsRange(spreadsheetId) {
+  const metadata = await sheets.spreadsheets.get({
+    spreadsheetId,
+    fields: 'sheets(properties(title,hidden))',
+  });
+  const tabs = (metadata.data.sheets || []).map(s => s.properties).filter(p => !p.hidden);
+  const tab = tabs.find(p => p.title.toLowerCase() === 'leads') || tabs[0];
+  if (!tab) throw new Error('No visible worksheets found in the configured spreadsheet');
+  const escapedTitle = tab.title.replace(/'/g, "''");
+  return "'" + escapedTitle + "'!A:Z";
+}
+
 // Health check endpoint
 app.get('/', (req, res) => {
   res.json({ 
@@ -57,7 +72,7 @@ app.get('/api/leads', async (req, res) => {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
-      range: 'Sheet1!A:Z',
+      range: await resolveLeadsRange(sheetId),
     });
 
     const rows = response.data.values || [];
