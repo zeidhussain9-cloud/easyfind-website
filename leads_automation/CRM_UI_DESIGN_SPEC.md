@@ -1,6 +1,6 @@
 # EasyFind CRM — UI Design Specification
 
-**Status:** Design in progress; D01 and D02 approved  
+**Status:** Design in progress; D01, D02 and D03 approved  
 **Working branch:** `feature/leads-crm-architecture`  
 **Visual workspace:** [Figma — EasyFind CRM — Design System & Lead Inbox](https://www.figma.com/design/PBiMGsVQ0fVpSf39WwNmKb)  
 **Visual baseline:** [Approved Canva CRM concept](https://canva.link/qmph6ij1o6lue57)  
