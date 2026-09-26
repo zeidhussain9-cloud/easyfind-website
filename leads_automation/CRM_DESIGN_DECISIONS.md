@@ -16,6 +16,16 @@
 - No real customer data in mockups. Existing screenshots can inform layout, but sample screens must be clearly labeled illustrative.
 - The approved Canva reference is the visual baseline. New layouts must preserve its restrained CRM character.
 
+## Approved visual flow (2026-09-26)
+
+The owner approved the visual presentation showing **Dashboard → Leads Inbox → dedicated Lead Workspace → Update & Act → Saved History**, including compact mobile inbox and mobile lead tabs. The presentation is a **conceptual mockup**; all illustrated names, counts, customer messages and property cards are examples, not verified live data.
+
+**Visual-flow preview:** generated in the design discussion on 2026-09-26. The approved Canva design remains the primary editable design reference: https://canva.link/qmph6ij1o6lue57. Preserve the flow and layout in the next high-fidelity Canva iteration.
+
+**Lead-workspace tabs approved as navigation concept:** Overview, Conversation, Requirements, Property Matches, AI & Drafts, Activity & History. Detailed contents of these tabs remain separate checklist decisions.
+
+**Customer naming rule:** append and display the customer name as soon as it is known, throughout all relevant screens; retain phone as a fallback and as the underlying contact identifier. Never infer an unverified name from illustrative mockup content.
+
 ## Design baseline — already agreed
 
 - [x] **D00.1 — Visual direction:** restrained, clean, compact CRM; navy header, white surfaces, muted blue-gray typography, green WhatsApp action, minimal decoration; responsive/mobile-first.
@@ -34,8 +44,8 @@
 
 ### 1. Navigation and information architecture
 
-- [ ] **D01.1 — Primary navigation:** approve sections and their order (proposed: Inbox, Lead Workspace, Follow-ups, Inventory, Activity, Settings).
-- [ ] **D01.2 — Default landing screen:** decide whether Inbox, Needs Attention or another view opens after login.
+- [x] **D01.1 — Primary navigation:** approved after visual flow review: **Dashboard, Leads Inbox, Follow-ups, Inventory, Activity, Settings**. Clicking a lead opens its dedicated workspace (not a top-level menu item), with **Overview, Conversation, Requirements, Property Matches, AI & Drafts, Activity & History** tabs. Customer name is shown wherever available; otherwise show the phone number. The approved visual flow also shows the mobile inbox and tabbed mobile workspace.
+- [x] **D01.2 — Default landing screen:** **Main Dashboard** opens after login, with business/lead overview and navigation to the Inbox and other sections. Approved together with the visual flow.
 - [ ] **D01.3 — Desktop structure:** approve left lead list + central conversation + right intelligence/action panel versus alternate layout.
 - [ ] **D01.4 — Mobile structure:** approve inbox → individual lead → tabs/sections rather than an endless scrolling page.
 - [ ] **D01.5 — Persistent controls:** decide where global search, source selector, refresh and account/logout appear.
@@ -44,7 +54,7 @@
 ### 2. Inbox and lead qualification
 
 - [ ] **D02.1 — Inbox eligibility:** which classification categories appear in the main working inbox; what happens to Cold Inquiry and Property Listing Sent.
-- [ ] **D02.2 — Customer identity:** show name when verified, otherwise phone; indicate if the same customer appears on multiple source numbers.
+- [x] **D02.2 — Customer identity:** show and progressively populate the customer's name wherever available (dashboard recent activity, inbox row, lead header, conversation where appropriate, follow-ups, inventory matches/sharing and activity); fall back to phone when the name is unknown. Preserve source-number attribution when the same customer appears across multiple EFPS numbers. Exact name-verification/edit controls remain for D03.1/D03.6.
 - [ ] **D02.3 — Lead-row content:** agree compact row fields (name/number, BHK, location, source, status, last interaction, unread/new-activity marker).
 - [ ] **D02.4 — Sorting:** default order and alternate sorts (latest activity, priority, follow-up due).
 - [ ] **D02.5 — Filters:** source WhatsApp number, classification, status, priority, location, BHK and activity.
@@ -55,7 +65,7 @@
 
 ### 3. Individual lead workspace
 
-- [ ] **D03.1 — Lead header:** customer identity, click-to-WhatsApp, source-number badges, classification, status, last activity.
+- [ ] **D03.1 — Lead header:** visual flow approved in principle: display available customer name (otherwise phone), click-to-WhatsApp, source-number badges, classification, status and last activity. Exact header field hierarchy remains to be finalized.
 - [ ] **D03.2 — Conversation view:** incoming/outgoing bubbles, dates, source number, media placeholders and jump to latest.
 - [ ] **D03.3 — Historical coverage:** display first/last available message dates and clearly identify gaps; never imply the archive is complete if it is not.
 - [ ] **D03.4 — Requirements panel:** approve visible fields and ordering (BHK, location, budget, furnishing, move-in, tenant type, pets, parking, notes).
@@ -115,7 +125,7 @@
 - [ ] **D08.4 — Mobile screens:** approve corresponding narrow-screen flows and fixed primary actions.
 - [ ] **D08.5 — Realistic but synthetic sample states:** qualified lead, cold inquiry, no matches, multiple matches, AI draft and follow-up overdue.
 - [ ] **D08.6 — Accessibility:** readable text sizes, contrast, touch targets, keyboard navigation and color-independent statuses.
-- [ ] **D08.7 — Design walkthrough:** approve one end-to-end workflow from new WhatsApp message through classification, requirement update, match and reply.
+- [ ] **D08.7 — Design walkthrough:** the initial **Dashboard → Inbox → individual tabbed Lead Workspace → Update & Act → Saved History** navigation flow has been visually approved. A later complete operational walkthrough from a new incoming WhatsApp message through qualification, matching and reply is still required.
 - [ ] **D08.8 — Final design freeze:** owner approves the full UI specification and all unresolved design questions are documented.
 - [ ] **D08.9 — Data-audit handoff:** list actual live fields/tabs/rows that must be verified before implementation; no fabricated data.
 
@@ -137,7 +147,10 @@
 | 2026-09-26 | One logical workspace per qualified customer | Preserves full history without hundreds of physical spreadsheet tabs. |
 | 2026-09-26 | Human-edited fields take priority over AI suggestions | Operator remains in control of customer records. |
 | 2026-09-26 | On-demand AI, deterministic inventory matching | Avoid unnecessary API calls and fabricated property details. |
+| 2026-09-26 | **D01.1 approved after visual review**: Dashboard, Inbox, Follow-ups, Inventory, Activity, Settings; lead opens a dedicated tabbed workspace | Owner explicitly approved the shown desktop/mobile navigation flow. |
+| 2026-09-26 | **D01.2 approved**: main Dashboard is the landing screen | Owner requested the Dashboard in the visual flow and approved it. |
+| 2026-09-26 | **D02.2 approved**: show customer names as soon as available, with phone fallback | Owner explicitly requested progressive name display throughout the CRM. |
 
 ## Next question
 
-**D01.1 — Primary navigation.** Proposed sections: Inbox, Lead Workspace (opened from Inbox, not necessarily a separate menu item), Follow-ups, Inventory, Activity, Settings. Ask owner to approve or change this navigation before checking D01.1.
+**D01.3 — Desktop structure.** The initial visual flow is approved, but decide whether the lead workspace should keep the mockup's Overview (requirements + conversation preview + reply + matches) as the default, with dedicated tabs for detailed work, or instead always show a persistent three-column workspace (lead list + full conversation + intelligence/action). Present the two options visually before requesting approval.
