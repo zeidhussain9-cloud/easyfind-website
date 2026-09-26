@@ -138,7 +138,9 @@ The owner approved the visual presentation showing **Dashboard â†’ Leads Inbox â
 - [ ] No AI output is presented as an observed customer fact without attribution.
 - [ ] Owner approves the design before any production UI, database, sync or webhook changes.
 
-## Figma design direction
+## Non-silent failure requirement
+
+**Design-wide requirement approved 2026-09-26:** every meaningful failure state must be observable. The system should provide structured internal logging plus a corresponding user-facing state whenever the failure affects data freshness, an action, processing status or expected behavior. Error states should identify the affected area and provide a safe recovery action (for example Retry) without exposing secrets or raw provider payloads. Silent fallback is not permitted when it could mislead the operator about current data or completed actions.
 
 **2026-09-26:** Figma is now the preferred design workspace for future CRM design exploration, high-fidelity screens, component work and visual iteration. Canva remains the **approved visual reference** for the original restrained CRM direction; Figma is the working design environment going forward.
 
@@ -184,6 +186,7 @@ This map defines what each UI area is intended to read from or write to. It dist
 | 2026-09-26 | **D01.1 approved after visual review**: Dashboard, Inbox, Follow-ups, Inventory, Activity, Settings; lead opens a dedicated tabbed workspace | Owner explicitly approved the shown desktop/mobile navigation flow. |
 | 2026-09-26 | **D01.2 approved**: main Dashboard is the landing screen | Owner requested the Dashboard in the visual flow and approved it. |
 | 2026-09-26 | **D02.2 approved**: show customer names as soon as available, with phone fallback | Owner explicitly requested progressive name display throughout the CRM. |
+| 2026-09-26 | **D01.6 approved**: no-silent-failure loading/error/stale-data design | User explicitly requires all failures to be logged and properly surfaced for easy debugging and trustworthy operation. |
 | 2026-09-26 | **D01.3 approved**: use Tabbed Lead Workspace (Option A) as the primary desktop lead-detail pattern | Owner approved the visual comparison and the focused, structured layout. |
 | 2026-09-26 | **D01.4 approved**: use tabbed lead navigation on mobile | Owner approved the mobile representation in the visual comparison. |
 | 2026-09-26 | **D01.5 approved**: top-bar persistent controls with dropdown source/filter controls | Owner approved the dropdown UI version; page-specific filters remain compact dropdowns instead of a permanent sidebar. |
