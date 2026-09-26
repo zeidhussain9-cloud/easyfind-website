@@ -524,7 +524,7 @@ function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] items-center overflow-hidden pb-12 pt-24 sm:pb-16 md:min-h-[90vh] md:pb-20 md:pt-32"
+      className="relative flex min-h-[auto] items-center overflow-hidden pb-16 pt-28 sm:pb-20 md:pt-36"
       style={{ background: NAVY }}
     >
       <div
@@ -535,8 +535,8 @@ function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-5 sm:gap-10 md:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:gap-12">
-        <div className="flex min-w-0 flex-col items-center justify-center text-center lg:items-start lg:text-left">
+      <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-5 text-center md:px-8">
+        <div className="flex min-w-0 flex-col items-center justify-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white/90">
             <span className="flex h-2 w-2 rounded-full bg-green-400 animate-pulse" />
             Bangalore's Trusted Property Partner
@@ -562,7 +562,7 @@ function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
             Solutions handles it all across Bangalore. We help owners and clients move faster, avoid
             delays, and make the right decisions.
           </p>
-          <div className="mt-8 flex w-full max-w-xl flex-col items-stretch justify-center gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4 lg:justify-start">
+          <div className="mt-8 flex w-full max-w-xl flex-col items-stretch justify-center gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
             <button
               onClick={() => scrollToId("#lead-form")}
               className="min-h-12 rounded-lg px-6 py-3.5 text-base font-bold shadow-lg transition-transform hover:-translate-y-1 sm:px-8 sm:py-4"
@@ -579,7 +579,7 @@ function Hero({ onPrivacyClick }: { onPrivacyClick: () => void }) {
             </button>
           </div>
         </div>
-        <div className="relative z-10 flex w-full items-center justify-center lg:justify-end">
+        <div className="relative z-10 mt-10 flex w-full max-w-xl items-center justify-center md:mt-12">
           <ContactForm onPrivacyClick={onPrivacyClick} />
         </div>
       </div>
@@ -836,15 +836,14 @@ function AreasSection() {
   } as const;
 
   return (
-    <section id="areas" className="overflow-hidden py-16 md:py-24" style={{ background: SURFACE }}>
+    <section id="areas" className="overflow-hidden py-16 md:py-24" style={{ background: "#EEF4F7" }}>
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionLabel>Areas We Cover</SectionLabel>
         <div style={{ fontFamily: '"Libre Baskerville", Georgia, serif' }}>
           <SectionTitle>East Bangalore, Mapped by Character</SectionTitle>
         </div>
         <p className="mx-auto mt-4 max-w-2xl text-center text-base" style={{ color: MUTED }}>
-          We group localities by how people actually live and work — so you can choose the right
-          fit, faster.
+          Focused coverage across Bengaluru’s key residential and work corridors.
         </p>
         <div
           className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12"
@@ -895,13 +894,13 @@ function AreasSection() {
                   {c.tagline}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
-                  {c.localities.map((loc) => (
+                  {c.localities.slice(0, 3).map((loc) => (
                     <span
                       key={loc}
-                      className="inline-flex items-center border-l-2 px-2 py-0.5 text-xs font-semibold"
-                      style={{
-                        background: style.tagBackground,
-                        borderColor: GOLD,
+                    className="inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold"
+                    style={{
+                        background: "transparent",
+                        borderColor: featured ? "rgba(255,255,255,0.35)" : "rgba(26,58,92,0.22)",
                         color: style.tagColor,
                       }}
                     >
