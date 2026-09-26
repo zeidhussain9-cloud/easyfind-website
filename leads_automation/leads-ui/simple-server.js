@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const { GoogleAuth } = require('google-auth-library');
 const { google } = require('googleapis');
 
@@ -44,18 +45,13 @@ async function resolveLeadsRange(spreadsheetId) {
   return "'" + escapedTitle + "'!A:Z";
 }
 
-// Health check endpoint
+// Serve the lead-management interface at the service homepage.
 app.get('/', (req, res) => {
-  res.json({ 
-    status: 'ok',
-    service: 'leads-ui-dashboard',
-    message: 'API is running',
-    endpoints: {
-      health: '/',
-      leads: '/api/leads',
-      sheet_info: '/api/sheet-info'
-    }
-  });
+  res.sendFile(path.join(__dirname, 'dashboard.html'));
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', service: 'leads-ui-dashboard' });
 });
 
 // Get all leads from Google Sheet
