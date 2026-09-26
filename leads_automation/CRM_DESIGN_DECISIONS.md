@@ -55,13 +55,13 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 
 - [x] **D02.1 — Inbox eligibility:** the primary working Inbox shows **Qualified Leads**. **Cold Inquiry / uncertain conversations go to a separate Review Queue** so everything potentially relevant remains reviewable. Other categories (Agent/Partner, Vendor/Supplier, Personal/Family, Spam/Marketing, Internal) remain outside the main lead inbox but are retained in the raw/archive layer and can be reclassified or reviewed when appropriate. **Property Listing Sent** is handled outside the primary qualified-lead inbox unless later reclassified.
 - [x] **D02.2 — Customer identity:** show and progressively populate the customer's name wherever available (dashboard recent activity, inbox row, lead header, conversation where appropriate, follow-ups, inventory matches/sharing and activity); fall back to phone when the name is unknown. Preserve source-number attribution when the same customer appears across multiple EFPS numbers. Exact name-verification/edit controls remain for D03.1/D03.6.
-- [ ] **D02.3 — Lead-row content:** agree compact row fields (name/number, BHK, location, source, status, last interaction, unread/new-activity marker).
-- [ ] **D02.4 — Sorting:** default order and alternate sorts (latest activity, priority, follow-up due).
-- [ ] **D02.5 — Filters:** source WhatsApp number, classification, status, priority, location, BHK and activity.
-- [ ] **D02.6 — Search:** searchable fields and whether it searches conversation content as well as lead details.
-- [ ] **D02.7 — Counts:** label Total Extracted, Qualified Leads, Needs Attention, Matching Results clearly; avoid ambiguous “228 leads.”
-- [ ] **D02.8 — Duplicates:** design treatment for one customer present across two or three EFPS numbers.
-- [ ] **D02.9 — Reclassification:** design manual Promote to Lead / Not a Lead / Review controls with reversible actions.
+- [x] **D02.3 — Lead-row content:** compact Inbox row shows customer name (primary); phone, BHK + primary location; budget max when known; status; priority; source badge(s); last interaction; and a clear new-activity / needs-review marker.
+- [x] **D02.4 — Sorting:** default is **latest customer activity first**; alternate sorts are priority, follow-up due, and recently created.
+- [x] **D02.5 — Filters:** compact dropdown filters for EFPS source, classification/queue, lead status, priority, BHK, location, follow-up state, and new activity / needs analysis; include Clear Filters.
+- [x] **D02.6 — Search:** deterministic search across customer name, phone, BHK, preferred location, tags/notes and conversation text; indicate the matching field; never invoke AI for search.
+- [x] **D02.7 — Counts:** use operational counts: Qualified Leads, Review Queue, Needs Attention, Follow-ups Due, and New Activity. Avoid ambiguous raw totals as primary working metrics.
+- [x] **D02.8 — Duplicates:** confidently identical customers become one logical customer with multiple EFPS source badges/conversations; uncertain identity becomes Suspected Duplicate; user chooses Merge or Keep Separate; never silently merge.
+- [x] **D02.9 — Reclassification:** reversible actions: Promote to Lead, Send to Review, Not a Lead, Reclassify, and Restore/Undo where applicable; every change creates an audit/activity event and preserves classification history.
 
 ### 3. Individual lead workspace
 
