@@ -265,6 +265,119 @@ Every reclassification creates an activity/audit event and preserves the origina
 ### Package approval rule
 Approve all D02.3–D02.9 together as proposed, or specify only the item(s) to change. Approval means **design approved**, not implementation complete.
 
+
+## D03 review package — pending owner approval
+
+The following D03.1–D03.10 decisions are being presented together for one visual approval pass. Until explicitly approved, they remain unchecked.
+
+### D03.1 — Lead header
+Proposed header hierarchy:
+1. Customer name (primary; phone fallback)
+2. Phone + direct WhatsApp action
+3. EFPS source badge(s)
+4. Classification
+5. Lead status
+6. Priority
+7. Last activity / new activity state
+
+Keep the header compact and persistent while navigating lead tabs.
+
+### D03.2 — Conversation view
+Proposed:
+- chronological WhatsApp-style timeline
+- clear Incoming / Outgoing separation
+- date/time separators
+- sender/source attribution
+- message type indicators for image/audio/video/document/location/sticker where data provides them
+- jump to latest
+- unread/new-message marker
+- no AI-generated text mixed into actual conversation
+
+### D03.3 — Historical coverage
+Proposed:
+- always show the available-history boundary: first available message and latest available message
+- clearly label partial windows / gaps where known
+- show a compact banner when the archive is not proven complete
+- never imply "full history" just because all currently retrieved rows are displayed
+
+### D03.4 — Requirements panel
+Proposed ordered fields:
+- BHK
+- Preferred location(s)
+- Budget min / max
+- Furnishing
+- Occupancy / tenant type
+- Move-in date
+- Pet preference
+- Parking
+- Current requirement summary
+- Notes
+
+Unknown/unconfirmed values use an explicit state rather than blanks that could be mistaken for "not required."
+
+### D03.5 — Provenance
+Proposed lightweight field-state indicator:
+- Human
+- AI
+- Source-message backed
+- System
+
+Details can expand on demand to avoid clutter. Never present AI-derived values as observed facts without context.
+
+### D03.6 — Manual editing
+Proposed inline edit pattern:
+- click/edit field
+- Save / Cancel
+- clear confirmation for materially changing a requirement
+- human override becomes authoritative
+- record who/what/when in activity history
+- do not require AI for manual edits
+
+### D03.7 — Status and priority
+Proposed persistent controls in the lead header:
+- Lead Status
+- Priority
+
+Use compact dropdowns. Status transitions create activity events; priority changes are auditable.
+
+### D03.8 — Follow-up
+Proposed:
+- Next follow-up date/time
+- Next action
+- overdue indicator
+- follow-up count
+- quick reschedule
+- activity note
+
+Follow-up state should be visible from Overview and in the Follow-ups section.
+
+### D03.9 — Activity timeline
+Proposed chronological timeline combining:
+- human edits
+- classification/reclassification
+- status/priority changes
+- follow-up actions
+- requirement changes
+- AI runs (when later designed)
+- draft actions (when later designed)
+- property actions (when later designed)
+- system events
+
+System events should be distinguishable from human actions.
+
+### D03.10 — Lead merge/split
+Proposed advanced action:
+- accessible from a secondary/overflow menu, not the primary workspace
+- show both records side-by-side before merge
+- preview the resulting combined identity, source numbers, conversations, requirements and activity
+- explicit confirmation
+- retain an audit record
+- "Keep Separate" remains available when identity is uncertain
+- Split is available later if a mistaken merge is reversed; preserve the original audit trail
+
+### D03 package rule
+Approve all D03.1–D03.10 together as proposed, or specify only the item(s) to change. Approval means design approved, not implementation complete.
+
 ## Next question
 
 **D01.6 — Loading, empty and error states.** Decide what the user sees when a page is loading, has no records, has stale data, or a source (Google Sheets, webhook stream, AI or inventory) is temporarily unavailable.
