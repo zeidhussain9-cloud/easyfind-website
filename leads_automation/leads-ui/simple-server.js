@@ -62,7 +62,7 @@ function safeEqual(a,b) { const x=Buffer.from(String(a)); const y=Buffer.from(St
 function isAuthenticated(req) {
   const cookies = Object.fromEntries((req.headers.cookie || '').split(';').map(c=>{const i=c.indexOf('=');return i<0?['','']:[c.slice(0,i).trim(),c.slice(i+1).trim()]}));
   const token = cookies.efps_session || '';
-  const match = /^(\\d+)\\.([a-f0-9]{64})$/.exec(token);
+  const match = /^(\d+)\.([a-f0-9]{64})$/.exec(token);
   if (!match) return false;
   const issued = Number(match[1]);
   return Number.isSafeInteger(issued) && issued <= Date.now() && Date.now()-issued < sessionLifetime && safeEqual(match[2],sign(match[1]));
