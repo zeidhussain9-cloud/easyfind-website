@@ -1,0 +1,167 @@
+# ============================================================================
+# EasyFind Lead Management System - Python Dependencies
+# ============================================================================
+# Install with: pip install -r requirements.txt
+# Python 3.12+ required
+# ============================================================================
+
+# ============================================================================
+# GOOGLE SERVICES
+# ============================================================================
+# Google Sheets API integration
+gspread>=6.0.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.1.0
+google-auth-httplib2>=0.1.1
+google-api-python-client>=2.100.0
+
+# ============================================================================
+# AWS SERVICES (Optional - for Bedrock AI classification)
+# ============================================================================
+# AWS SDK for Python (Bedrock, S3, etc.)
+boto3>=1.34.0
+botocore>=1.34.0
+
+# ============================================================================
+# AI / ML LIBRARIES
+# ============================================================================
+# Anthropic Claude API (for direct API access)
+anthropic>=0.25.0
+
+# OpenAI API (for GPT models)
+openai>=1.10.0
+
+# Google Generative AI (Gemini)
+google-generativeai>=0.3.0
+
+# ============================================================================
+# WHATSAPP DATA EXTRACTION
+# ============================================================================
+# WhatsApp backup file extraction and decryption
+whatsapp-chat-exporter>=0.9.0
+pycryptodome>=3.19.0
+
+# ============================================================================
+# DATA PROCESSING
+# ============================================================================
+# Data manipulation and analysis
+pandas>=2.1.0
+numpy>=1.24.0
+
+# JSON processing (included in stdlib, but explicit for clarity)
+# json - stdlib
+
+# CSV processing (stdlib)
+# csv - stdlib
+
+# ============================================================================
+# HTTP & API
+# ============================================================================
+# HTTP requests library
+requests>=2.31.0
+
+# URL parsing and manipulation
+urllib3>=2.0.0
+
+# ============================================================================
+# DATABASE
+# ============================================================================
+# SQLite3 (included in Python stdlib)
+# sqlite3 - stdlib
+
+# Optional: SQLAlchemy for advanced ORM
+# sqlalchemy>=2.0.0
+
+# ============================================================================
+# UTILITIES
+# ============================================================================
+# Environment variable management
+python-dotenv>=1.0.0
+
+# Date and time utilities (stdlib enhanced)
+python-dateutil>=2.8.2
+
+# Regular expressions (stdlib)
+# re - stdlib
+
+# Logging (stdlib)
+# logging - stdlib
+
+# Argument parsing (stdlib)
+# argparse - stdlib
+
+# Path manipulation (stdlib)
+# pathlib - stdlib
+
+# ============================================================================
+# DEVELOPMENT DEPENDENCIES (Optional)
+# ============================================================================
+# Uncomment for development
+
+# Code formatting
+# black>=23.11.0
+# autopep8>=2.0.4
+
+# Linting
+# flake8>=6.1.0
+# pylint>=3.0.0
+
+# Type checking
+# mypy>=1.7.0
+
+# Testing
+# pytest>=7.4.3
+# pytest-cov>=4.1.0
+# pytest-mock>=3.12.0
+
+# Documentation
+# sphinx>=7.2.6
+# sphinx-rtd-theme>=2.0.0
+
+# ============================================================================
+# PINNED VERSIONS (Production)
+# ============================================================================
+# For production deployments, pin exact versions:
+# 
+# gspread==6.1.0
+# google-auth==2.25.2
+# boto3==1.34.25
+# anthropic==0.25.8
+# openai==1.12.0
+# whatsapp-chat-exporter==0.9.10
+# pycryptodome==3.19.1
+# pandas==2.1.4
+# requests==2.31.0
+# python-dotenv==1.0.0
+# python-dateutil==2.8.2
+
+# ============================================================================
+# NOTES
+# ============================================================================
+# 
+# Installation:
+#   pip install -r requirements.txt
+#
+# Update all packages:
+#   pip install --upgrade -r requirements.txt
+#
+# Create virtual environment first:
+#   python3 -m venv .venv
+#   source .venv/bin/activate  # macOS/Linux
+#   .venv\Scripts\activate     # Windows
+#
+# Freeze current environment:
+#   pip freeze > requirements-freeze.txt
+#
+# AI Provider Notes:
+#   - Use boto3 for AWS Bedrock (Claude)
+#   - Use anthropic for direct Anthropic API
+#   - Use openai for OpenAI GPT models
+#   - Use google-generativeai for Gemini
+#   - Only install what you need
+#
+# Platform-specific:
+#   - pycryptodome may require build tools on some systems
+#   - whatsapp-chat-exporter requires Python 3.8+
+#
+# ============================================================================

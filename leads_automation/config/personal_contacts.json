@@ -1,0 +1,13 @@
+{
+  "contacts": {
+    "+918951525386": {
+      "label": "Mom",
+      "reasoning": "Personal family contact"
+    },
+    "+447442564541": {
+      "label": "Friend",
+      "reasoning": "Personal friend"
+    }
+  },
+  "default_confidence": 1.0
+}

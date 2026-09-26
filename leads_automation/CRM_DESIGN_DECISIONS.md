@@ -1,0 +1,395 @@
+# EasyFind CRM — Design Decision Register
+
+**Phase:** DESIGN ONLY. No implementation, production changes, live-data connection or AI API work in this phase.
+**Owner:** Zeid (single operator)
+**Updated:** 2026-09-26
+**Working branch:** `feature/leads-crm-architecture`
+**Related technical architecture:** [LEAD_CRM_MASTER_PLAN.md](./LEAD_CRM_MASTER_PLAN.md)
+
+## How we work
+
+- One design decision at a time. Ask the owner the next unresolved question; do not infer approval from a proposed default.
+- Mark `[x]` only after the owner explicitly approves a decision already discussed, or a decision is already unambiguously approved in prior conversation.
+- Record the decision, why it was chosen, and any constraints under the relevant section.
+- `[ ]` means unresolved. `[x]` means approved; it does **not** mean built or tested.
+- Keep a short dated Decision Log at the end. Update this file in GitHub after each design decision.
+- No real customer data in mockups. Existing screenshots can inform layout, but sample screens must be clearly labeled illustrative.
+- The approved Canva reference is the visual baseline. New layouts must preserve its restrained CRM character.
+
+## Approved visual flow (2026-09-26)
+
+The owner approved the visual presentation showing **Dashboard → Leads Inbox → dedicated Lead Workspace → Update & Act → Saved History**, including compact mobile inbox and mobile lead tabs. The presentation is a **conceptual mockup**; all illustrated names, counts, customer messages and property cards are examples, not verified live data.
+
+**Visual-flow preview:** generated in the design discussion on 2026-09-26. The approved Canva design remains the primary editable design reference: https://canva.link/qmph6ij1o6lue57. Preserve the flow and layout in the next high-fidelity Canva iteration.
+
+**Lead-workspace tabs approved as navigation concept:** Overview, Conversation, Requirements, Property Matches, AI & Drafts, Activity & History. Detailed contents of these tabs remain separate checklist decisions.
+
+**Customer naming rule:** append and display the customer name as soon as it is known, throughout all relevant screens; retain phone as a fallback and as the underlying contact identifier. Never infer an unverified name from illustrative mockup content.
+
+## Design baseline — already agreed
+
+- [x] **D00.1 — Visual direction:** restrained, clean, compact CRM; navy header, white surfaces, muted blue-gray typography, green WhatsApp action, minimal decoration; responsive/mobile-first.
+- [x] **D00.2 — Canva reference:** [Approved CRM design — open in Canva](https://canva.link/qmph6ij1o6lue57). Preserve this reference throughout design and handoff.
+- [x] **D00.3 — Product scope:** private, single-user EasyFind leads CRM covering three EFPS WhatsApp source numbers.
+- [x] **D00.4 — Dedicated lead workspace:** one logical workspace per qualifying customer; do not create a physical Google Sheets tab per lead.
+- [x] **D00.5 — Core workspace capabilities:** complete available conversation history, evolving customer requirements, editable fields, AI analysis/draft history, inventory matching and activity history.
+- [x] **D00.6 — Human control:** the operator can edit requirements, status and notes; explicit manual overrides take precedence over AI proposals.
+- [x] **D00.7 — AI interaction:** on-demand analysis and response drafts; opening a lead, searching or filtering does not itself invoke AI.
+- [x] **D00.8 — Inventory matching:** deterministic matching against verified inventory; AI may word a response using only verified property records.
+- [x] **D00.9 — Event concept:** preserve raw webhook events and append normalized messages; do not silently delete non-lead conversations from the raw archive.
+- [x] **D00.10 — Reply safety:** draft first; user reviews/edits before copying/opening WhatsApp. No automatic sending in the initial design.
+- [x] **D00.11 — Design sequence:** finalize UX/UI decisions first, then inspect live data, reconcile fields, connect data, and implement.
+
+## Complete design checklist
+
+### 1. Navigation and information architecture
+
+- [x] **D01.1 — Primary navigation:** approved after visual flow review: **Dashboard, Leads Inbox, Follow-ups, Inventory, Activity, Settings**. Clicking a lead opens its dedicated workspace (not a top-level menu item), with **Overview, Conversation, Requirements, Property Matches, AI & Drafts, Activity & History** tabs. Customer name is shown wherever available; otherwise show the phone number. The approved visual flow also shows the mobile inbox and tabbed mobile workspace.
+- [x] **D01.2 — Default landing screen:** **Main Dashboard** opens after login, with business/lead overview and navigation to the Inbox and other sections. Approved together with the visual flow.
+- [x] **D01.3 — Desktop structure:** approved **Tabbed Lead Workspace (Option A)** as the primary lead-detail experience. The selected lead opens a focused workspace with a lead header and tabs, while the Inbox remains the separate place for browsing/switching leads. A compact Overview can surface key details, latest conversation, AI draft and matching properties without forcing all detailed panels to remain permanently visible.
+- [x] **D01.4 — Mobile structure:** approved the visual flow **Inbox → Lead Workspace → tabbed sections**, with compact fixed actions such as WhatsApp and Generate AI Reply. Avoid an endless single-page scroll for lead detail.
+- [x] **D01.5 — Persistent controls:** approved **top-bar control layout** shown in the visual comparison: global search, WhatsApp source dropdown, data/refresh status and account menu stay in the top bar. Page-specific filters use dropdown controls in the page content rather than a permanently visible filter sidebar. This preserves the clean, spacious CRM layout.
+- [x] **D01.6 — Loading, empty and error states:** approved with strict **NO SILENT FAILURE**. Use skeleton loading, explicit useful empty states, inline errors with Retry, and visible freshness/stale indicators. Every meaningful failure, retry, stale-data condition and processing exception must be logged and mapped to a user-visible state when it affects the operator. No silent drop or misleading stale/current presentation.
+
+### 2. Inbox and lead qualification
+
+- [x] **D02.1 — Inbox eligibility:** the primary working Inbox shows **Qualified Leads**. **Cold Inquiry / uncertain conversations go to a separate Review Queue** so everything potentially relevant remains reviewable. Other categories (Agent/Partner, Vendor/Supplier, Personal/Family, Spam/Marketing, Internal) remain outside the main lead inbox but are retained in the raw/archive layer and can be reclassified or reviewed when appropriate. **Property Listing Sent** is handled outside the primary qualified-lead inbox unless later reclassified.
+- [x] **D02.2 — Customer identity:** show and progressively populate the customer's name wherever available (dashboard recent activity, inbox row, lead header, conversation where appropriate, follow-ups, inventory matches/sharing and activity); fall back to phone when the name is unknown. Preserve source-number attribution when the same customer appears across multiple EFPS numbers. Exact name-verification/edit controls remain for D03.1/D03.6.
+- [x] **D02.3 — Lead-row content:** compact Inbox row shows customer name (primary); phone, BHK + primary location; budget max when known; status; priority; source badge(s); last interaction; and a clear new-activity / needs-review marker.
+- [x] **D02.4 — Sorting:** default is **latest customer activity first**; alternate sorts are priority, follow-up due, and recently created.
+- [x] **D02.5 — Filters:** compact dropdown filters for EFPS source, classification/queue, lead status, priority, BHK, location, follow-up state, and new activity / needs analysis; include Clear Filters.
+- [x] **D02.6 — Search:** deterministic search across customer name, phone, BHK, preferred location, tags/notes and conversation text; indicate the matching field; never invoke AI for search.
+- [x] **D02.7 — Counts:** use operational counts: Qualified Leads, Review Queue, Needs Attention, Follow-ups Due, and New Activity. Avoid ambiguous raw totals as primary working metrics.
+- [x] **D02.8 — Duplicates:** confidently identical customers become one logical customer with multiple EFPS source badges/conversations; uncertain identity becomes Suspected Duplicate; user chooses Merge or Keep Separate; never silently merge.
+- [x] **D02.9 — Reclassification:** reversible actions: Promote to Lead, Send to Review, Not a Lead, Reclassify, and Restore/Undo where applicable; every change creates an audit/activity event and preserves classification history.
+
+### 3. Individual lead workspace
+
+- [x] **D03.1 — Lead header:** name first (phone fallback), phone + direct WhatsApp, EFPS source badge(s), classification, status, priority and last/new activity. Compact and persistent across lead tabs.
+- [x] **D03.2 — Conversation view:** chronological WhatsApp-style timeline sourced from the normalized `Conversations` records, using each message's timestamp for date/time grouping, direction for Incoming/Outgoing treatment, sender/source attribution, message type, and message body. The lead-specific conversation is linked to that customer's identity; source-number linkage is preserved separately so the same customer can have conversations from multiple EFPS numbers. AI drafts are never inserted as actual conversation messages.
+- [x] **D03.3 — Historical coverage:** always show the first and latest available message dates, known gaps/partial windows, and an explicit incomplete-history state when completeness is unproven.
+- [x] **D03.4 — Requirements panel:** BHK, preferred locations, budget min/max, furnishing, occupancy/tenant type, move-in date, pet preference, parking, current requirement summary and notes; unknown/unconfirmed is explicit.
+- [x] **D03.5 — Provenance:** lightweight Human / AI / Source-message-backed / System indicators with expandable detail.
+- [x] **D03.6 — Manual editing:** inline edit → Save/Cancel; human-edited value becomes authoritative; material changes can request confirmation; manual edits do not require AI; changes are audited.
+- [x] **D03.7 — Status and priority:** compact header dropdowns; status and priority changes create auditable activity events.
+- [x] **D03.8 — Follow-up:** next date/time, next action, overdue indicator, follow-up count, quick reschedule and note; visible in Overview and Follow-ups.
+- [x] **D03.9 — Activity timeline:** chronological record of human edits, classification, status/priority, follow-ups, requirement changes, AI runs/drafts, property actions and system events as those capabilities are added; human/system distinction is visible.
+- [x] **D03.10 — Lead merge/split:** advanced overflow action with side-by-side preview, resulting identity/source/history preview, explicit confirmation, audit trail, Keep Separate option, and reversible split later without losing history.
+
+### 4. AI intelligence and reply drafting\n\n**APPROVED 8/8; detailed superseding checklist below.**\n\n### 5. Inventory experience
+
+- [ ] **D05.1 — Inventory entry:** global Inventory screen and contextual Matches panel within each lead.
+- [ ] **D05.2 — Match card:** listing ID, verified locality, BHK, rent, furnishing, availability, match explanation and missing information.
+- [ ] **D05.3 — Match strictness:** mandatory criteria, flexible criteria and explicit Unknown states.
+- [ ] **D05.4 — Manual matching:** let the operator search, pin, exclude or override a suggestion with a recorded reason.
+- [ ] **D05.5 — Inventory freshness:** last verified/updated indicator and treatment of unavailable properties.
+- [ ] **D05.6 — Share workflow:** choose properties, prepare a verified listing summary and optionally incorporate them into a reply draft.
+- [ ] **D05.7 — Share history:** track suggested/shared/rejected/visited properties per lead without claiming a WhatsApp send unless verified.
+
+### 6. Live activity and webhook visibility
+
+- [ ] **D06.1 — New-message behavior:** badges, updated ordering and per-lead Needs Analysis state.
+- [ ] **D06.2 — Three-number source UI:** clearly distinguish the customer number from the EFPS number on which the conversation occurred.
+- [ ] **D06.3 — Webhook event monitor:** decide whether raw event history belongs in an advanced admin/activity view rather than the main inbox.
+- [ ] **D06.4 — Processing states:** show received, deduplicated, processed, failed and retry/replay states.
+- [ ] **D06.5 — Media and message edits:** define treatment of attachments, unsupported content, deletions and delivery/read receipts where provided.
+- [ ] **D06.6 — Provider limitations:** design unavailable states for events/history the chosen WhatsApp integration cannot actually supply.
+
+### 7. Privacy, safety and operator control
+
+- [ ] **D07.1 — Authentication UX:** private login, session expiry, logout and password-reset/recovery design.
+- [ ] **D07.2 — Sensitive content:** masking/reveal, privacy on mobile and safe display of personal chats outside the qualified inbox.
+- [ ] **D07.3 — Confirmation patterns:** changes requiring confirmation, reversible operations and destructive-action warnings.
+- [ ] **D07.4 — Audit visibility:** what is shown for manual edits, AI runs, exports and event processing.
+- [ ] **D07.5 — Data export/retention UX:** export lead/history, retention and deletion request controls.
+- [ ] **D07.6 — Failure recovery:** Sheets write conflicts, offline/disconnected state, webhook backlog and stale data banners.
+
+### 8. Visual design system and final handoff
+
+- [ ] **D08.1 — Typography, spacing and colors:** formalize tokens from the approved Canva concept.
+- [ ] **D08.2 — Components:** lead row, status badge, source badge, requirement field, conversation bubble, draft card, inventory card, timeline event.
+- [ ] **D08.3 — Desktop screens:** approve annotated high-fidelity Inbox, Lead Workspace, Inventory and Activity views.
+- [ ] **D08.4 — Mobile screens:** approve corresponding narrow-screen flows and fixed primary actions.
+- [ ] **D08.5 — Realistic but synthetic sample states:** qualified lead, cold inquiry, no matches, multiple matches, AI draft and follow-up overdue.
+- [ ] **D08.6 — Accessibility:** readable text sizes, contrast, touch targets, keyboard navigation and color-independent statuses.
+- [ ] **D08.7 — Design walkthrough:** the initial **Dashboard → Inbox → individual tabbed Lead Workspace → Update & Act → Saved History** navigation flow has been visually approved. A later complete operational walkthrough from a new incoming WhatsApp message through qualification, matching and reply is still required.
+- [ ] **D08.8 — Final design freeze:** owner approves the full UI specification and all unresolved design questions are documented.
+- [ ] **D08.9 — Data-audit handoff:** list actual live fields/tabs/rows that must be verified before implementation; no fabricated data.
+
+## Design-phase exit criteria
+
+- [ ] Every D01–D08 item has a decision or explicitly documented deferred status.
+- [ ] Canva design reference and updated screen mockups are linked here.
+- [ ] The approved navigation, desktop and mobile flows are documented.
+- [ ] Every UI field is tagged **verified existing / proposed new / awaiting live-data audit**.
+- [ ] No AI output is presented as an observed customer fact without attribution.
+- [ ] Owner approves the design before any production UI, database, sync or webhook changes.
+
+## Cross-cutting persistence requirements approved 2026-09-26
+
+**Every AI run must be recorded.** Whenever AI is invoked for a lead, the system will preserve an immutable AI Run record containing the lead reference, execution time, model/context version, the message state examined, relevant prior AI memory/version, structured output, requirement changes, confidence/uncertainty and any draft produced. A later AI call can therefore determine exactly what was previously analyzed and what new messages or changes occurred after that run.
+
+**Conversation chronology is source-derived.** The timeline is reconstructed from normalized conversation records using stored message timestamps, direction, sender and source attribution. All messages remain tied to the lead/customer context; source-number provenance is retained separately when a customer appears across multiple EFPS numbers.
+
+**Drafts are separate from conversations.** AI-generated responses are stored as draft records and are never treated as observed WhatsApp messages. A draft being generated/copied/opened is not equivalent to it being sent.
+
+## Non-silent failure requirement
+
+**Design-wide requirement approved 2026-09-26:** every meaningful failure state must be observable. The system should provide structured internal logging plus a corresponding user-facing state whenever the failure affects data freshness, an action, processing status or expected behavior. Error states should identify the affected area and provide a safe recovery action (for example Retry) without exposing secrets or raw provider payloads. Silent fallback is not permitted when it could mislead the operator about current data or completed actions.
+
+**2026-09-26:** Figma is now the preferred design workspace for future CRM design exploration, high-fidelity screens, component work and visual iteration. Canva remains the **approved visual reference** for the original restrained CRM direction; Figma is the working design environment going forward.
+
+## Dataset-to-screen design map (design-level)
+
+This map defines what each UI area is intended to read from or write to. It distinguishes existing verified repositories/sheets from proposed future records. Final column names and live-row availability will be validated during the later live-data audit.
+
+| UI area | Primary data source | Supporting data | What the user sees |
+|---|---|---|---|
+| **Main Dashboard** | `Leads` | `Events`, `Conversations` | Lead counts, status/priority distribution, recent activity, source-number activity, follow-up workload, latest changes. |
+| **Leads Inbox** | `Leads` | latest `Conversations`, source mapping | Qualified-lead rows, name/phone, BHK, location, budget, status, priority, source, last interaction, new-activity marker. |
+| **Lead → Overview** | `Leads` | latest `Conversations`, `Events`, future `Lead Sources` | Customer identity, source WhatsApp number(s), status, priority, current requirements, latest conversation, next action, key matches/draft preview. |
+| **Lead → Conversation** | `Conversations` | source mapping, future `Webhook Events` | Full available message timeline, incoming/outgoing messages, timestamps, message types/media indicators, source attribution and history boundaries. |
+| **Lead → Requirements** | current `Leads` requirement fields | future `Requirement History`, message references, future `AI Runs` | Current requirement values, AI/manual provenance, proposed changes, missing information, requirement-change timeline. |
+| **Lead → Property Matches** | future/verified `Inventory` | future `Lead Property Matches`, current lead requirements | Deterministic property matches, exact inventory facts, match/fail/unknown criteria, shortlist/share history. |
+| **Lead → AI & Drafts** | future `AI Runs`, future `Reply Drafts` | `Conversations`, current requirements, inventory matches | Latest AI analysis, what changed, saved drafts, draft versions, referenced properties and regenerate/copy actions. |
+| **Lead → Activity & History** | `Events` | `Conversations`, future `AI Runs`, `Reply Drafts`, `Webhook Events` | Human edits, follow-ups, requirement changes, analyses, drafts, property actions and system events in chronological order. |
+| **Follow-ups** | `Leads` (`Next Followup Date`, status, priority) | `Events`, latest `Conversations` | Due/overdue leads, next action, latest customer context and one-click opening of the lead workspace. |
+| **Inventory** | future `Inventory` | future matching indexes/status data | Searchable available inventory, listing status/freshness and structured property details. |
+| **Activity** | `Events` | future `Webhook Events`, `AI Runs`, `Reply Drafts` | System/operator activity stream, filters by event type/source/lead and processing state. |
+| **Settings** | configured source-number/config records | authentication/integration metadata | EFPS source numbers, integration state, account/session controls and system preferences. |
+| **WhatsApp Live** (future live-ingestion view) | future `Webhook Events` | `Conversations`, `Leads` | Incoming event stream, source number, customer number, message/event type, processing state, retry/error state. |
+
+### Data-flow principles
+
+- **Leads** is the current customer-level working state.
+- **Conversations** is the raw normalized message history and should remain append-only.
+- **Events** is the business/lifecycle activity history.
+- **Inventory** is the property source of truth once connected and verified.
+- **AI Runs / Reply Drafts / Requirement History / Webhook Events / Lead Sources / Lead Property Matches** are proposed persistent records for the next architecture phases; they are not claimed to exist in the current live workbook yet.
+- The user should experience this as **one lead workspace**, even though the data is linked across multiple records/tables.
+- The physical Google Sheets layout is an implementation concern; the UI should not mirror spreadsheet tabs one-to-one.
+
+## Decision log
+
+| Date | Decision | Rationale |
+|---|---|---|
+| 2026-09-26 | Preserve approved restrained CRM Canva reference | User explicitly approved the visual direction. |
+| 2026-09-26 | Design before live-data connection and implementation | User wants to settle the experience and track decisions first. |
+| 2026-09-26 | One logical workspace per qualified customer | Preserves full history without hundreds of physical spreadsheet tabs. |
+| 2026-09-26 | Human-edited fields take priority over AI suggestions | Operator remains in control of customer records. |
+| 2026-09-26 | On-demand AI, deterministic inventory matching | Avoid unnecessary API calls and fabricated property details. |
+| 2026-09-26 | **D01.1 approved after visual review**: Dashboard, Inbox, Follow-ups, Inventory, Activity, Settings; lead opens a dedicated tabbed workspace | Owner explicitly approved the shown desktop/mobile navigation flow. |
+| 2026-09-26 | **D01.2 approved**: main Dashboard is the landing screen | Owner requested the Dashboard in the visual flow and approved it. |
+| 2026-09-26 | **D02.2 approved**: show customer names as soon as available, with phone fallback | Owner explicitly requested progressive name display throughout the CRM. |
+| 2026-09-26 | **D01.6 approved**: no-silent-failure loading/error/stale-data design | User explicitly requires all failures to be logged and properly surfaced for easy debugging and trustworthy operation. |
+| 2026-09-26 | **D01.3 approved**: use Tabbed Lead Workspace (Option A) as the primary desktop lead-detail pattern | Owner approved the visual comparison and the focused, structured layout. |
+| 2026-09-26 | **D01.4 approved**: use tabbed lead navigation on mobile | Owner approved the mobile representation in the visual comparison. |
+| 2026-09-26 | **D01.5 approved**: top-bar persistent controls with dropdown source/filter controls | Owner approved the dropdown UI version; page-specific filters remain compact dropdowns instead of a permanent sidebar. |
+| 2026-09-26 | **Figma approved as the ongoing design workspace** | Owner explicitly requested Figma for design help going forward. |
+
+## D02 review package — approved (historical)
+
+The following D02.3–D02.9 decisions are being presented together for one visual approval pass. Until the owner explicitly approves the package, they remain unchecked.
+
+### D02.3 — Lead-row content
+Proposed compact row:
+- Customer name (primary)
+- Phone (secondary, masked/truncated where appropriate)
+- Requirement snapshot: BHK + primary preferred location
+- Budget max when known
+- Status + priority badges
+- Source WhatsApp badge(s)
+- Last interaction
+- New-activity / needs-review marker
+
+### D02.4 — Sorting
+Proposed default: **Latest customer activity first**.
+Secondary sort options: Priority, Follow-up due, Recently created.
+A manual "pinned" state can remain above normal sorting if later approved.
+
+### D02.5 — Filters
+Proposed compact dropdown/filter controls:
+- EFPS source number
+- Classification / queue
+- Lead status
+- Priority
+- BHK
+- Location
+- Follow-up state
+- New activity / needs analysis
+
+Filters combine with search and are removable with one Clear Filters action.
+
+### D02.6 — Search
+Proposed global Inbox search across:
+- customer name
+- phone number
+- BHK / preferred location
+- tags / notes
+- conversation text
+
+Search should indicate which field produced the match and should not require AI.
+
+### D02.7 — Counts
+Proposed dashboard/inbox counters:
+- **Qualified Leads**
+- **Review Queue**
+- **Needs Attention**
+- **Follow-ups Due**
+- **New Activity**
+Counts are descriptive and operational, not ambiguous "total leads" numbers.
+
+### D02.8 — Duplicate customer handling
+Proposed behavior:
+- One logical customer record when identity is confidently the same.
+- Multiple EFPS source badges and conversations linked underneath.
+- Suspected duplicate state when identity is uncertain.
+- Manual "Merge" / "Keep Separate" action with audit event.
+- Never silently merge based only on a matching phone fragment or name.
+
+### D02.9 — Reclassification
+Proposed reversible controls:
+- **Promote to Lead**
+- **Send to Review**
+- **Not a Lead**
+- **Reclassify**
+- **Restore / Undo** where applicable
+
+Every reclassification creates an activity/audit event and preserves the original classification history.
+
+### Package approval rule
+Approve all D02.3–D02.9 together as proposed, or specify only the item(s) to change. Approval means **design approved**, not implementation complete.
+
+
+## D03 review package — approved (historical)
+
+The following D03.1–D03.10 decisions are being presented together for one visual approval pass. Until explicitly approved, they remain unchecked.
+
+### D03.1 — Lead header
+Proposed header hierarchy:
+1. Customer name (primary; phone fallback)
+2. Phone + direct WhatsApp action
+3. EFPS source badge(s)
+4. Classification
+5. Lead status
+6. Priority
+7. Last activity / new activity state
+
+Keep the header compact and persistent while navigating lead tabs.
+
+### D03.2 — Conversation view
+Proposed:
+- chronological WhatsApp-style timeline
+- clear Incoming / Outgoing separation
+- date/time separators
+- sender/source attribution
+- message type indicators for image/audio/video/document/location/sticker where data provides them
+- jump to latest
+- unread/new-message marker
+- no AI-generated text mixed into actual conversation
+
+### D03.3 — Historical coverage
+Proposed:
+- always show the available-history boundary: first available message and latest available message
+- clearly label partial windows / gaps where known
+- show a compact banner when the archive is not proven complete
+- never imply "full history" just because all currently retrieved rows are displayed
+
+### D03.4 — Requirements panel
+Proposed ordered fields:
+- BHK
+- Preferred location(s)
+- Budget min / max
+- Furnishing
+- Occupancy / tenant type
+- Move-in date
+- Pet preference
+- Parking
+- Current requirement summary
+- Notes
+
+Unknown/unconfirmed values use an explicit state rather than blanks that could be mistaken for "not required."
+
+### D03.5 — Provenance
+Proposed lightweight field-state indicator:
+- Human
+- AI
+- Source-message backed
+- System
+
+Details can expand on demand to avoid clutter. Never present AI-derived values as observed facts without context.
+
+### D03.6 — Manual editing
+Proposed inline edit pattern:
+- click/edit field
+- Save / Cancel
+- clear confirmation for materially changing a requirement
+- human override becomes authoritative
+- record who/what/when in activity history
+- do not require AI for manual edits
+
+### D03.7 — Status and priority
+Proposed persistent controls in the lead header:
+- Lead Status
+- Priority
+
+Use compact dropdowns. Status transitions create activity events; priority changes are auditable.
+
+### D03.8 — Follow-up
+Proposed:
+- Next follow-up date/time
+- Next action
+- overdue indicator
+- follow-up count
+- quick reschedule
+- activity note
+
+Follow-up state should be visible from Overview and in the Follow-ups section.
+
+### D03.9 — Activity timeline
+Proposed chronological timeline combining:
+- human edits
+- classification/reclassification
+- status/priority changes
+- follow-up actions
+- requirement changes
+- AI runs (when later designed)
+- draft actions (when later designed)
+- property actions (when later designed)
+- system events
+
+System events should be distinguishable from human actions.
+
+### D03.10 — Lead merge/split
+Proposed advanced action:
+- accessible from a secondary/overflow menu, not the primary workspace
+- show both records side-by-side before merge
+- preview the resulting combined identity, source numbers, conversations, requirements and activity
+- explicit confirmation
+- retain an audit record
+- "Keep Separate" remains available when identity is uncertain
+- Split is available later if a mistaken merge is reversed; preserve the original audit trail
+
+### D03 package rule
+Approve all D03.1–D03.10 together as proposed, or specify only the item(s) to change. Approval means design approved, not implementation complete.
+
+## Design repository/deployment reference
+
+The UI dashboard is deployed from the repository **`zeidhussain9-cloud/easyfind-website`**, on branch **`feature/leads-automation`**, with Render service **`leads-ui-dashboard`** using root directory **`leads_automation/leads-ui`**. The design branch is used for design documentation/work; approved changes are synchronized into the deployment branch deliberately. Nothing in the design process should target `main` unless separately approved.
+
+## Next section\n\nD05 Inventory Experience — proposed, awaiting review.\n
+
+## D04 approved design handoff — 2026-09-26
+**D04.1–D04.8 APPROVED (8/8); design only, not implemented.** Supersedes the earlier ten-item D04 placeholder. D05 Inventory Experience remains proposed (0/7).
+- [x] D04.1 AI workspace: previous runs, saved intelligence, new messages, latest draft; explicit AI actions only. No AI call on open, search, filter, manual edit or copy.
+- [x] D04.2 First analysis: full relevant available conversation across linked EFPS numbers, human-confirmed values, source attribution, incomplete-history warning.
+- [x] D04.3 Saved intelligence: versioned intelligence, append-only requirement changes and evidence, immutable AI runs, exact successfully analyzed message IDs and per-source cursor.
+- [x] D04.4 Subsequent runs: saved intelligence + new message IDs + recent human edits + relevant older context; explicit full reanalysis; cursor advances only after durable commit.
+- [x] D04.5 Requirement review: current/proposed side by side, source evidence, uncertainty, individual Accept/Reject/Edit, human authority and audit.
+- [x] D04.6 Draft editor: versioned editable drafts, regenerate, save, approve, copy, discard, verified inventory references. Copy/open is not sent; sent needs observed outgoing message or explicit operator confirmation. No automatic send in v1.
+- [x] D04.7 AI run and draft history: every attempt, including failures, analyzed message IDs, model/prompt, previous/resulting intelligence, output/error, draft version/status and usage when known.
+- [x] D04.8 Failure/cost/recovery: visible processing, partial, failed, stale, retry states; correlation ID and idempotent retry; unknown provider cost is not zero; failure does not advance cursor; no silent failures.
+Approved Figma: https://www.figma.com/design/PBiMGsVQ0fVpSf39WwNmKb?node-id=16-2 ; https://www.figma.com/design/PBiMGsVQ0fVpSf39WwNmKb?node-id=20-2 . Field maps: node-id=16-110 and node-id=20-164 in the same file. Illustrative records are not live data.
+Existing repository Leads, Conversations and Events are documented. Proposed Lead Sources, Customer Intelligence, Requirement History, AI Runs, Reply Drafts, Webhook Events, Inventory and Lead Property Matches require schema/live-data audit. Preserve EFPS source per message. Live inventory schema and rows remain unverified.
+Deployment boundary: repo zeidhussain9-cloud/easyfind-website, Render leads-ui-dashboard, deployed branch feature/leads-automation, root leads_automation/leads-ui. Design branch feature/leads-crm-architecture. Do not merge CRM into main. Documentation changes do not implement functionality.
+D05 preview pending approval: D05.1 global Inventory + per-lead Matches; D05.2 verified match cards; D05.3 mandatory/flexible/unknown criteria; D05.4 manual pin/exclude/override with reason; D05.5 freshness; D05.6 verified share preparation; D05.7 lead property history.
