@@ -49,7 +49,7 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 - [x] **D01.3 — Desktop structure:** approved **Tabbed Lead Workspace (Option A)** as the primary lead-detail experience. The selected lead opens a focused workspace with a lead header and tabs, while the Inbox remains the separate place for browsing/switching leads. A compact Overview can surface key details, latest conversation, AI draft and matching properties without forcing all detailed panels to remain permanently visible.
 - [x] **D01.4 — Mobile structure:** approved the visual flow **Inbox → Lead Workspace → tabbed sections**, with compact fixed actions such as WhatsApp and Generate AI Reply. Avoid an endless single-page scroll for lead detail.
 - [x] **D01.5 — Persistent controls:** approved **top-bar control layout** shown in the visual comparison: global search, WhatsApp source dropdown, data/refresh status and account menu stay in the top bar. Page-specific filters use dropdown controls in the page content rather than a permanently visible filter sidebar. This preserves the clean, spacious CRM layout.
-- [ ] **D01.6 — Empty/loading/error states:** define what the user sees when a tab is empty, data is loading or Sheets is unavailable.
+- [x] **D01.6 — Loading, empty and error states:** approved with strict **NO SILENT FAILURE**. Use skeleton loading, explicit useful empty states, inline errors with Retry, and visible freshness/stale indicators. Every meaningful failure, retry, stale-data condition and processing exception must be logged and mapped to a user-visible state when it affects the operator. No silent drop or misleading stale/current presentation.
 
 ### 2. Inbox and lead qualification
 
@@ -173,6 +173,12 @@ This map defines what each UI area is intended to read from or write to. It dist
 - **AI Runs / Reply Drafts / Requirement History / Webhook Events / Lead Sources / Lead Property Matches** are proposed persistent records for the next architecture phases; they are not claimed to exist in the current live workbook yet.
 - The user should experience this as **one lead workspace**, even though the data is linked across multiple records/tables.
 - The physical Google Sheets layout is an implementation concern; the UI should not mirror spreadsheet tabs one-to-one.
+
+## Persistence rules confirmed with D03
+
+Every AI run is recorded as an immutable history entry for the lead, including when it ran, what message state/context was analyzed, the previous AI-memory version, structured findings/changes, confidence/uncertainty and the generated draft reference. A later AI call can therefore identify what was previously analyzed and what new work appeared afterward.
+
+The conversation timeline is reconstructed from stored message timestamps, direction, sender/source context, message type and body. The full available conversation remains linked to the lead. Source-number provenance remains separate for customers appearing across multiple EFPS numbers.
 
 ## Decision log
 
