@@ -188,7 +188,39 @@ Every displayed value should be treated as one of:
 
 Design mockups use illustrative records only and must not be mistaken for live customers or live properties.
 
-## 11. AI design placeholder
+
+## 11. Lead workspace design (D03 proposal)
+
+The D03 visual-review package proposes the following lead workspace behavior. These are design proposals until D03.1–D03.10 are approved in `CRM_DESIGN_DECISIONS.md`.
+
+### Header
+Customer name first (phone fallback), phone/direct WhatsApp, EFPS source badge(s), classification, status, priority and last-activity/new-activity state.
+
+### Conversation
+Chronological WhatsApp-style timeline with Incoming/Outgoing separation, time/date separators, source/sender attribution, message-type indicators, jump-to-latest and new-message state. AI drafts must never be rendered as actual conversation messages.
+
+### Historical coverage
+Show first and latest available message dates, known gaps/partial-window indicators and an explicit partial-history state when completeness is unproven.
+
+### Requirements
+Ordered current-state fields: BHK, preferred locations, budget min/max, furnishing, occupancy/tenant type, move-in date, pet preference, parking, requirement summary and notes. Unknown/unconfirmed values have explicit states.
+
+### Provenance
+Lightweight Human / AI / Source-message-backed / System indicators, with expandable detail.
+
+### Editing
+Inline edit with Save/Cancel. Human-edited values take precedence. Material changes can request confirmation. Manual edits do not require AI.
+
+### Status, priority and follow-up
+Compact dropdowns in the header; follow-up includes date/time, next action, overdue state, count, quick reschedule and note.
+
+### Activity
+Chronological audit timeline spanning human edits, classifications, status/priority changes, follow-ups, future AI runs/drafts, future property actions and system events.
+
+### Merge/split
+Advanced overflow action. Preview both records before merge, explicitly confirm, audit the result, preserve the original trail, and allow later split/reversal.
+
+## 12. AI design placeholder
 
 The AI section is intentionally not finalized in D02. Its detailed design will be decided in Section D04 of the design register.
 
@@ -210,7 +242,7 @@ When finalized, the design must preserve:
 **9/9 approved**
 
 ### D03 — Lead workspace
-Not yet reviewed
+10 decisions — **visual review in progress**
 
 ### D04 — AI intelligence and reply drafting
 Not yet reviewed
