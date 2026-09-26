@@ -980,3 +980,18 @@ These are deliberate next phases.
 > Inventory matching is deterministic.  
 > The CRM UI brings all of it together into one lead workspace.**
 
+
+
+## Design decisions and visual reference
+
+The visual baseline is the approved restrained CRM concept in Canva: https://canva.link/qmph6ij1o6lue57
+
+The approved navigation flow is:
+
+**Dashboard → Leads Inbox → Individual Lead Workspace → Update & Act → Saved History**
+
+The owner approved the **Tabbed Lead Workspace** as the primary desktop pattern and the corresponding tabbed mobile workspace. The logical lead workspace contains Overview, Conversation, Requirements, Property Matches, AI & Drafts, and Activity & History.
+
+Customer names should be displayed wherever known, with phone number as fallback. Figma is the preferred working environment for future CRM design iterations, high-fidelity screens, components and visual review; Canva remains the approved original visual reference.
+
+Detailed decision tracking is maintained in `CRM_DESIGN_DECISIONS.md`.
