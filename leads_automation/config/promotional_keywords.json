@@ -1,0 +1,24 @@
+{
+  "promotional_patterns": [
+    "cashews", "free", "discount", "offer", "% off", "sale", "deal",
+    "limited time", "buy now", "shop now", "exclusive", "promo",
+    "voucher", "coupon", "cashback", "reward"
+  ],
+  "service_notifications": [
+    "OTP", "verification code", "bank alert", "transaction", "account",
+    "credited", "debited", "balance", "HDFC", "ICICI", "SBI", "Axis",
+    "delivery", "order", "tracking", "shipped", "delivered"
+  ],
+  "movie_booking": [
+    "ticket booked", "booking confirmation", "show time", "movie",
+    "cinema", "seat", "screen"
+  ],
+  "food_delivery": [
+    "order placed", "food", "restaurant", "Swiggy", "Zomato", "delivery",
+    "arriving in", "preparing"
+  ],
+  "automated_patterns": [
+    "Do not reply", "automated message", "no-reply", "noreply",
+    "unsubscribe", "click here", "visit our website"
+  ]
+}

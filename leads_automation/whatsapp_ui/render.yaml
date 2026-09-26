@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: whatsapp-lead-ui
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: REACT_APP_GOOGLE_SHEETS_API_KEY
+        value: your-google-sheets-api-key
+      - key: REACT_APP_SPREADSHEET_ID
+        value: your-spreadsheet-id
+      - key: REACT_APP_SERVICE_ACCOUNT_KEY
+        value: your-service-account-key
+
+  - type: cron
+    name: refresh-data
+    env: node
+    schedule: "0 * * * *"
+    command: node scripts/refreshData.js
+    envVars:
+      - key: GOOGLE_SHEETS_API_KEY
+        value: your-google-sheets-api-key
+      - key: SPREADSHEET_ID
+        value: your-spreadsheet-id
+      - key: SERVICE_ACCOUNT_KEY
+        value: your-service-account-key

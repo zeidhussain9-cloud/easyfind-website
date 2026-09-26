@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "name": "Qualified Lead",
+      "description": "Active rental inquiry with clear requirements (location, budget, BHK)",
+      "priority": 1
+    },
+    {
+      "name": "Cold Inquiry",
+      "description": "General rental inquiry without specifics or single message inquiry",
+      "priority": 2
+    },
+    {
+      "name": "Agent/Partner",
+      "description": "Known agent from partner list or fellow broker collaboration",
+      "priority": 3
+    },
+    {
+      "name": "Property Listing Sent",
+      "description": "Agent sent property details/catalogue to customer",
+      "priority": 4
+    },
+    {
+      "name": "Vendor/Supplier",
+      "description": "Another business reaching out (services, tech vendors)",
+      "priority": 5
+    },
+    {
+      "name": "Personal/Family",
+      "description": "Friend, family, personal conversation",
+      "priority": 6
+    },
+    {
+      "name": "Spam/Marketing",
+      "description": "Promotional messages, service notifications, automated messages",
+      "priority": 7
+    },
+    {
+      "name": "Internal",
+      "description": "Messages from/to EFPS phone numbers",
+      "priority": 8
+    }
+  ]
+}

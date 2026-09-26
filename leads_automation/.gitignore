@@ -1,0 +1,192 @@
+# ============================================================================
+# LEADS AUTOMATION - GIT IGNORE
+# ============================================================================
+# Exclude: Data files, credentials, logs, generated content, dependencies
+# Include: Source code, configuration templates, documentation
+# ============================================================================
+
+# ============================================================================
+# SENSITIVE DATA & CREDENTIALS
+# ============================================================================
+*.key
+*.pem
+*.p12
+gcpnew-key.json
+service-account*.json
+credentials.json
+.env
+.env.local
+.env.*.local
+secrets.json
+
+# ============================================================================
+# DATABASE FILES (Contains customer data)
+# ============================================================================
+*.db
+*.sqlite
+*.sqlite3
+leads.db
+
+# ============================================================================
+# DATA FILES (Conversations, Classifications, Exports)
+# ============================================================================
+# JSON data files with actual customer conversations
+*_conversations.json
+part*.json
+collection_assignments.json
+collection_assignments_updated.json
+current_collections.json
+final_bulk_assignment.json
+remaining_unassigned.json
+leads_for_classification.json
+
+# CSV exports
+*.csv
+part*_classifications.csv
+
+# Text exports
+*_phones.txt
+classification_output.txt
+google_sheet_config.txt
+gemini_*.txt
+
+# ============================================================================
+# WHATSAPP BACKUP FILES
+# ============================================================================
+whatsapp_backups/
+extracted_data/
+*.crypt*
+msgstore.db*
+wa.db
+encrypted_backup.key
+
+# ============================================================================
+# LOGS & TEMPORARY FILES
+# ============================================================================
+*.log
+*.tmp
+*.temp
+classification_*.log
+*.log.*
+
+# ============================================================================
+# PYTHON
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.cover
+.hypothesis/
+.venv/
+venv/
+ENV/
+env/
+
+# ============================================================================
+# NODE.JS / REACT
+# ============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+package-lock.json
+yarn.lock
+
+# Build outputs
+build/
+dist/
+.next/
+out/
+.cache/
+.parcel-cache/
+
+# ============================================================================
+# IDE / EDITOR FILES
+# ============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ============================================================================
+# AI CODING ASSISTANTS (Local configurations)
+# ============================================================================
+.agents/
+.claude/
+.codex/
+.continue/
+.continuerules
+.cursor/
+.gemini/
+.kilo/
+.kiro/
+.opencode/
+.pi/
+.trae/
+.trae-cn/
+.aider*
+
+# ============================================================================
+# OS FILES
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ============================================================================
+# KEEP THESE FILES (Important)
+# ============================================================================
+# Config templates are kept
+!config/*.json
+
+# Documentation files are kept
+!*.md
+!README.md
+!DEPLOYMENT.md
+!ARCHITECTURE.md
+
+# Source code is kept
+!*.py
+!*.js
+!*.jsx
+!*.ts
+!*.tsx
+
+# Schema and requirements
+!schema.sql
+!requirements.txt
+!package.json
+
+# Render configuration
+!render.yaml

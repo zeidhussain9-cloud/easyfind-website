@@ -1,0 +1,21 @@
+{
+  "locations": [
+    "Whitefield", "Marathahalli", "HSR Layout", "Koramangala", "Indiranagar",
+    "BTM Layout", "Jayanagar", "JP Nagar", "Electronic City", "Sarjapur",
+    "Bellandur", "Bommanahalli", "Hebbal", "Yelahanka", "Yemlur",
+    "Kadugodi", "Varthur", "Brookefield", "ITPL", "Tin Factory",
+    "Mahadevapura", "KR Puram", "Rammurthy Nagar", "Hoodi", "Thubarahalli",
+    "Graphite India", "Kundalahalli", "Garudacharpalya", "CV Raman Nagar",
+    "Banaswadi", "Kalyan Nagar", "Hennur", "Kothanur", "Bannerghatta",
+    "Begur", "Hulimavu", "BTM", "Koramangala", "Ejipura", "Domlur",
+    "Old Airport Road", "HAL", "New Thippasandra", "Kaggadasapura"
+  ],
+  "alternate_names": {
+    "HSR": "HSR Layout",
+    "BTM": "BTM Layout",
+    "JP": "JP Nagar",
+    "Whitefield": "Whitefield",
+    "Yemalur": "Yemlur",
+    "Yemulur": "Yemlur"
+  }
+}

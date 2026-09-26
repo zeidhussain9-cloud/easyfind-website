@@ -1,0 +1,25 @@
+{
+  "intents": {
+    "Requesting Quote": {
+      "keywords": ["how much", "what's the rent", "price", "budget", "cost", "rent is", "rental", "per month", "what is the", "kitna hai"]
+    },
+    "Booking Call": {
+      "keywords": ["can we talk", "call me", "schedule viewing", "visit", "inspection", "come see", "show me", "viewing", "appointment", "meet"]
+    },
+    "Property Listing Request": {
+      "keywords": ["send options", "show properties", "available flats", "any property", "what do you have", "send details", "share options", "properties available"]
+    },
+    "Support/Follow-up": {
+      "keywords": ["any update", "follow up", "what happened", "status", "heard back", "any news", "checking in"]
+    },
+    "Job Application": {
+      "keywords": ["hiring", "job", "resume", "position", "career", "vacancy", "employment", "work opportunity"]
+    },
+    "General Info": {
+      "keywords": ["where is", "which area", "available or not", "still available", "location", "address", "is this"]
+    },
+    "None": {
+      "keywords": []
+    }
+  }
+}

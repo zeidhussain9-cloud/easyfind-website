@@ -1,0 +1,34 @@
+{
+  "bhk_keywords": [
+    "1rk", "1 rk", "studio",
+    "1bhk", "1 bhk", "1 bedroom",
+    "2bhk", "2 bhk", "2 bedroom",
+    "3bhk", "3 bhk", "3 bedroom",
+    "4bhk", "4 bhk", "4 bedroom"
+  ],
+  "rental_terms": [
+    "rent", "rental", "lease", "tenant", "flat", "apartment", "property",
+    "looking for", "need", "require", "searching", "house", "room"
+  ],
+  "furnishing_keywords": [
+    "furnished", "semi furnished", "unfurnished", "fully furnished",
+    "semi-furnished", "un-furnished"
+  ],
+  "occupancy_keywords": [
+    "bachelor", "family", "corporate", "working professional",
+    "single", "couple", "students"
+  ],
+  "urgency_keywords": [
+    "immediate", "urgent", "asap", "within", "by", "soon", "quickly"
+  ],
+  "budget_keywords": [
+    "budget", "max", "maximum", "upto", "up to", "below", "around",
+    "k", "thousand", "lakh", "rent"
+  ],
+  "parking_keywords": [
+    "parking", "car park", "bike parking", "two wheeler", "vehicle"
+  ],
+  "pet_keywords": [
+    "pet", "dog", "cat", "pet friendly", "pets allowed"
+  ]
+}

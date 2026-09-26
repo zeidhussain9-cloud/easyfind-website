@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: leads-ui
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: GOOGLE_APPLICATION_CREDENTIALS
+        value: /etc/secrets/gcpnew-key.json
+      - key: SHEET_ID
+        value: 1GfM9lPQSukVpxCEVUlUDxFj_WYg0xQj8Inn7FA4sLVI
+      - key: NODE_ENV
+        value: production
+
+  - type: redis
+    name: leads-cache
+    ipAllowList: []
+    plan: free
+    maxmemoryPolicy: noeviction
