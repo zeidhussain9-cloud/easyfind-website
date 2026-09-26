@@ -192,6 +192,79 @@ This map defines what each UI area is intended to read from or write to. It dist
 | 2026-09-26 | **D01.5 approved**: top-bar persistent controls with dropdown source/filter controls | Owner approved the dropdown UI version; page-specific filters remain compact dropdowns instead of a permanent sidebar. |
 | 2026-09-26 | **Figma approved as the ongoing design workspace** | Owner explicitly requested Figma for design help going forward. |
 
+## D02 review package — pending owner approval
+
+The following D02.3–D02.9 decisions are being presented together for one visual approval pass. Until the owner explicitly approves the package, they remain unchecked.
+
+### D02.3 — Lead-row content
+Proposed compact row:
+- Customer name (primary)
+- Phone (secondary, masked/truncated where appropriate)
+- Requirement snapshot: BHK + primary preferred location
+- Budget max when known
+- Status + priority badges
+- Source WhatsApp badge(s)
+- Last interaction
+- New-activity / needs-review marker
+
+### D02.4 — Sorting
+Proposed default: **Latest customer activity first**.
+Secondary sort options: Priority, Follow-up due, Recently created.
+A manual "pinned" state can remain above normal sorting if later approved.
+
+### D02.5 — Filters
+Proposed compact dropdown/filter controls:
+- EFPS source number
+- Classification / queue
+- Lead status
+- Priority
+- BHK
+- Location
+- Follow-up state
+- New activity / needs analysis
+
+Filters combine with search and are removable with one Clear Filters action.
+
+### D02.6 — Search
+Proposed global Inbox search across:
+- customer name
+- phone number
+- BHK / preferred location
+- tags / notes
+- conversation text
+
+Search should indicate which field produced the match and should not require AI.
+
+### D02.7 — Counts
+Proposed dashboard/inbox counters:
+- **Qualified Leads**
+- **Review Queue**
+- **Needs Attention**
+- **Follow-ups Due**
+- **New Activity**
+Counts are descriptive and operational, not ambiguous "total leads" numbers.
+
+### D02.8 — Duplicate customer handling
+Proposed behavior:
+- One logical customer record when identity is confidently the same.
+- Multiple EFPS source badges and conversations linked underneath.
+- Suspected duplicate state when identity is uncertain.
+- Manual "Merge" / "Keep Separate" action with audit event.
+- Never silently merge based only on a matching phone fragment or name.
+
+### D02.9 — Reclassification
+Proposed reversible controls:
+- **Promote to Lead**
+- **Send to Review**
+- **Not a Lead**
+- **Reclassify**
+- **Restore / Undo** where applicable
+
+Every reclassification creates an activity/audit event and preserves the original classification history.
+
+### Package approval rule
+Approve all D02.3–D02.9 together as proposed, or specify only the item(s) to change. Approval means **design approved**, not implementation complete.
+
 ## Next question
 
 **D01.6 — Loading, empty and error states.** Decide what the user sees when a page is loading, has no records, has stale data, or a source (Google Sheets, webhook stream, AI or inventory) is temporarily unavailable.
