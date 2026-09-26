@@ -48,7 +48,7 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 - [x] **D01.2 — Default landing screen:** **Main Dashboard** opens after login, with business/lead overview and navigation to the Inbox and other sections. Approved together with the visual flow.
 - [x] **D01.3 — Desktop structure:** approved **Tabbed Lead Workspace (Option A)** as the primary lead-detail experience. The selected lead opens a focused workspace with a lead header and tabs, while the Inbox remains the separate place for browsing/switching leads. A compact Overview can surface key details, latest conversation, AI draft and matching properties without forcing all detailed panels to remain permanently visible.
 - [x] **D01.4 — Mobile structure:** approved the visual flow **Inbox → Lead Workspace → tabbed sections**, with compact fixed actions such as WhatsApp and Generate AI Reply. Avoid an endless single-page scroll for lead detail.
-- [ ] **D01.5 — Persistent controls:** decide where global search, source selector, refresh and account/logout appear.
+- [x] **D01.5 — Persistent controls:** approved **top-bar control layout** shown in the visual comparison: global search, WhatsApp source dropdown, data/refresh status and account menu stay in the top bar. Page-specific filters use dropdown controls in the page content rather than a permanently visible filter sidebar. This preserves the clean, spacious CRM layout.
 - [ ] **D01.6 — Empty/loading/error states:** define what the user sees when a tab is empty, data is loading or Sheets is unavailable.
 
 ### 2. Inbox and lead qualification
@@ -142,6 +142,36 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 
 **2026-09-26:** Figma is now the preferred design workspace for future CRM design exploration, high-fidelity screens, component work and visual iteration. Canva remains the **approved visual reference** for the original restrained CRM direction; Figma is the working design environment going forward.
 
+## Dataset-to-screen design map (design-level)
+
+This map defines what each UI area is intended to read from or write to. It distinguishes existing verified repositories/sheets from proposed future records. Final column names and live-row availability will be validated during the later live-data audit.
+
+| UI area | Primary data source | Supporting data | What the user sees |
+|---|---|---|---|
+| **Main Dashboard** | `Leads` | `Events`, `Conversations` | Lead counts, status/priority distribution, recent activity, source-number activity, follow-up workload, latest changes. |
+| **Leads Inbox** | `Leads` | latest `Conversations`, source mapping | Qualified-lead rows, name/phone, BHK, location, budget, status, priority, source, last interaction, new-activity marker. |
+| **Lead → Overview** | `Leads` | latest `Conversations`, `Events`, future `Lead Sources` | Customer identity, source WhatsApp number(s), status, priority, current requirements, latest conversation, next action, key matches/draft preview. |
+| **Lead → Conversation** | `Conversations` | source mapping, future `Webhook Events` | Full available message timeline, incoming/outgoing messages, timestamps, message types/media indicators, source attribution and history boundaries. |
+| **Lead → Requirements** | current `Leads` requirement fields | future `Requirement History`, message references, future `AI Runs` | Current requirement values, AI/manual provenance, proposed changes, missing information, requirement-change timeline. |
+| **Lead → Property Matches** | future/verified `Inventory` | future `Lead Property Matches`, current lead requirements | Deterministic property matches, exact inventory facts, match/fail/unknown criteria, shortlist/share history. |
+| **Lead → AI & Drafts** | future `AI Runs`, future `Reply Drafts` | `Conversations`, current requirements, inventory matches | Latest AI analysis, what changed, saved drafts, draft versions, referenced properties and regenerate/copy actions. |
+| **Lead → Activity & History** | `Events` | `Conversations`, future `AI Runs`, `Reply Drafts`, `Webhook Events` | Human edits, follow-ups, requirement changes, analyses, drafts, property actions and system events in chronological order. |
+| **Follow-ups** | `Leads` (`Next Followup Date`, status, priority) | `Events`, latest `Conversations` | Due/overdue leads, next action, latest customer context and one-click opening of the lead workspace. |
+| **Inventory** | future `Inventory` | future matching indexes/status data | Searchable available inventory, listing status/freshness and structured property details. |
+| **Activity** | `Events` | future `Webhook Events`, `AI Runs`, `Reply Drafts` | System/operator activity stream, filters by event type/source/lead and processing state. |
+| **Settings** | configured source-number/config records | authentication/integration metadata | EFPS source numbers, integration state, account/session controls and system preferences. |
+| **WhatsApp Live** (future live-ingestion view) | future `Webhook Events` | `Conversations`, `Leads` | Incoming event stream, source number, customer number, message/event type, processing state, retry/error state. |
+
+### Data-flow principles
+
+- **Leads** is the current customer-level working state.
+- **Conversations** is the raw normalized message history and should remain append-only.
+- **Events** is the business/lifecycle activity history.
+- **Inventory** is the property source of truth once connected and verified.
+- **AI Runs / Reply Drafts / Requirement History / Webhook Events / Lead Sources / Lead Property Matches** are proposed persistent records for the next architecture phases; they are not claimed to exist in the current live workbook yet.
+- The user should experience this as **one lead workspace**, even though the data is linked across multiple records/tables.
+- The physical Google Sheets layout is an implementation concern; the UI should not mirror spreadsheet tabs one-to-one.
+
 ## Decision log
 
 | Date | Decision | Rationale |
@@ -156,8 +186,9 @@ The owner approved the visual presentation showing **Dashboard → Leads Inbox �
 | 2026-09-26 | **D02.2 approved**: show customer names as soon as available, with phone fallback | Owner explicitly requested progressive name display throughout the CRM. |
 | 2026-09-26 | **D01.3 approved**: use Tabbed Lead Workspace (Option A) as the primary desktop lead-detail pattern | Owner approved the visual comparison and the focused, structured layout. |
 | 2026-09-26 | **D01.4 approved**: use tabbed lead navigation on mobile | Owner approved the mobile representation in the visual comparison. |
+| 2026-09-26 | **D01.5 approved**: top-bar persistent controls with dropdown source/filter controls | Owner approved the dropdown UI version; page-specific filters remain compact dropdowns instead of a permanent sidebar. |
 | 2026-09-26 | **Figma approved as the ongoing design workspace** | Owner explicitly requested Figma for design help going forward. |
 
 ## Next question
 
-**D01.5 — Persistent controls.** Decide where global search, source selector, refresh/sync status and account/logout should live across Desktop and Mobile. Visualize the options before approval.
+**D01.6 — Loading, empty and error states.** Decide what the user sees when a page is loading, has no records, has stale data, or a source (Google Sheets, webhook stream, AI or inventory) is temporarily unavailable.
