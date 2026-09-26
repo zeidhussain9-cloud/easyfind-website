@@ -995,3 +995,24 @@ The owner approved the **Tabbed Lead Workspace** as the primary desktop pattern 
 Customer names should be displayed wherever known, with phone number as fallback. Figma is the preferred working environment for future CRM design iterations, high-fidelity screens, components and visual review; Canva remains the approved original visual reference.
 
 Detailed decision tracking is maintained in `CRM_DESIGN_DECISIONS.md`.
+
+
+## Current design decisions (updated 2026-09-26)
+
+The design phase has now explicitly approved:
+
+- Main Dashboard as the post-login landing screen.
+- Main navigation: **Dashboard, Leads Inbox, Follow-ups, Inventory, Activity, Settings**.
+- Selecting a lead opens a **logical dedicated Lead Workspace**, not a physical Google Sheets tab.
+- Lead workspace navigation: **Overview, Conversation, Requirements, Property Matches, AI & Drafts, Activity & History**.
+- Desktop lead-detail pattern: **Tabbed Lead Workspace** as the primary focused layout.
+- Mobile pattern: compact Inbox followed by the tabbed Lead Workspace.
+- Persistent top-bar controls: **Global Search, WhatsApp Source dropdown, data/refresh status, account menu**.
+- Page-specific filters use compact dropdowns rather than a permanent filter sidebar.
+- Customer names should be displayed throughout the CRM wherever they are known; phone remains the fallback identifier.
+- Loading uses skeleton states; no-result states are explicit and useful.
+- **No silent failures:** meaningful failures, stale states, retries and processing exceptions must be logged and mapped to visible UI states where they affect the operator. Debugging must be traceable without exposing secrets.
+- **Figma is the working visual-design environment going forward.** The previously approved Canva concept remains the visual baseline/reference.
+- Design decisions are being approved sequentially in `CRM_DESIGN_DECISIONS.md`; approval means design decision only, not implementation.
+
+The next unresolved design area is **Lead Inbox eligibility and qualification behavior (D02.1)**. AI-context/memory design will be handled later in its dedicated section and is intentionally not being decided yet.
